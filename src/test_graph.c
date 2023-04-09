@@ -120,7 +120,7 @@ int main() {
 
     // Set the trip variable to point to the first Trip object
     Trip* trip = trip1;
-    printf("Distance trajet devrait être 8: %f", distance_trip(&my_graph, trip));
+    printf("Distance trajet devrait être 8: %f\n", distance_trip(&my_graph, trip));
 
     // Free memory
     free(link1);
