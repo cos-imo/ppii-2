@@ -18,6 +18,7 @@ int get_nb_vertices(Graph *graph) {
 }
 
 
+
 // Function to return the distance between two electric stations
 float distance_between(Graph graph, int id_station1, int id_station2){
     Link *current_link = graph.link_list;
@@ -60,6 +61,10 @@ float distance_trip(Graph *graph, Trip *trip){
 
     return d;
 }
+
+
+// Function computing Dijkstra Algorithm
+Trip dijkstra(Graph graph);
 
 
 
@@ -120,7 +125,7 @@ int main() {
 
     // Set the trip variable to point to the first Trip object
     Trip* trip = trip1;
-    printf("Distance trajet devrait être 8: %f", distance_trip(&my_graph, trip));
+    printf("Distance trajet devrait être 8: %f\n", distance_trip(&my_graph, trip));
 
     // Free memory
     free(link1);

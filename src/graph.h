@@ -32,3 +32,5 @@ typedef struct Trip{
 int get_nb_vertices(Graph *graph);
 Bool are_connected(Graph graph, int a, int b);//Inutile puisque graph complet
 float distance_between(Graph graph, int id_borne1, int id_borne2);
+float distance_trip(Graph *graph, Trip *trip);
+Trip dijkstra(Graph graph);
