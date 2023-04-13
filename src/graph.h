@@ -1,6 +1,8 @@
-#include "bases.h"
-#include "electric_station.h"
-
+// Boolean type
+typedef enum Bool{
+    FALSE,
+    TRUE
+} Bool;
 
 
 
@@ -9,13 +11,13 @@
 typedef struct Link{
     int id_borne_1;
     int id_borne_2;
-    float distance;
     struct Link *next;
 } Link;
 
+
 // Graph structure
 typedef struct Graph{
-    int *electric_station_id;
+    int *electric_station_id; // A changer en fonction du nom
     Link *link_list;
 } Graph;
 
@@ -30,7 +32,8 @@ typedef struct Trip{
 
 // Graph Functions
 int get_nb_vertices(Graph *graph);
-Bool are_connected(Graph graph, int a, int b);//Inutile puisque graph complet
 float distance_between(Graph graph, int id_borne1, int id_borne2);
 float distance_trip(Graph *graph, Trip *trip);
+void addVertex(Trip *trip, int id_borne);
+int distance(int idBorne1, int idBorne2);
 Trip dijkstra(Graph graph);
