@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "graph.h"
+//#include "electric_station.h"
 
 
 
@@ -61,6 +62,28 @@ float distance_trip(Graph *graph, Trip *trip){
 
 
     return d;
+}
+
+
+// Function to add an electric station to a trip
+void addVertex(Trip *trip, int id_borne){
+    Trip *current_vertex = trip->next;
+    while (current_vertex != NULL){
+        current_vertex = current_vertex->next;
+    }
+
+    // Building new vertex
+    Trip *new_station = (Trip*)malloc(sizeof(Trip));
+    new_station->id_borne = id_borne;
+    
+    // Linking it to the rest of the trip
+    current_vertex->next = new_station;
+}
+
+
+// Function to compute the distance between 2 vertices
+int distance(int idBorne1, int idBorne2){
+    // A toi Thomas
 }
 
 
