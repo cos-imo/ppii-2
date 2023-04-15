@@ -1,20 +1,18 @@
 CC=clang
 CFLAGS=-Wall -Wextra -pedantic -O0 -g3 -fsanitize=address
-#CFLAGS=-Wall -Wextra -pedantic
-#CFLAGS+=-O0 -g3 -fsanitize=address
 
 
-ALL_EXECUTABLES=graph vehicle electric_station
+ALL_EXECUTABLES=graph main # Ajouter tous les executables au fur et à mesure
 
 
-all: graph vehicle electric_station
+all: graph main # Pareil ici
 
 
-# # main file
-# main: main.o
-# 	$(CC) $(CFLAGS) -o main main.o
-# 
-# main.o: main.c
+# main file
+main: main.o
+	$(CC) $(CFLAGS) -o main main.o
+
+main.o: main.c
 
 
 # Graph File
@@ -23,16 +21,16 @@ graph: graph.o
 graph.o: graph.c
 
 
-# Vehicle File
-vehicle: vehicle.o
-	$(CC) $(CFLAGS) -o vehicle vehicle.o
-vehicle.o: vehicle.c
+# # Vehicle File
+# vehicle: vehicle.o
+# 	$(CC) $(CFLAGS) -o vehicle vehicle.o
+# vehicle.o: vehicle.c
 
 
-# Electri Station File
-electric_station: electric_station.o
-	$(CC) $(CFLAGS) -o electric_station electric_station.o
-electric_station.o: electric_station.c
+# # Electri Station File
+# electric_station: electric_station.o
+# 	$(CC) $(CFLAGS) -o electric_station electric_station.o
+# electric_station.o: electric_station.c
 
 
 
