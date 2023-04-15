@@ -3,11 +3,12 @@
 
 #include "graph.h"
 
+
 void main(){
     // Create a new Graph object
-    Graph my_graph;
-    my_graph.electric_station_id = NULL;
-    my_graph.link_list = NULL;
+    Graph graph;
+    graph.electric_station_id = NULL;
+    graph.link_list = NULL;
 
     // Add three vertices to the graph
     Link* link1 = (Link*)malloc(sizeof(Link));
@@ -27,12 +28,12 @@ void main(){
 
     link1->next = link2;
     link2->next = link3;
-    my_graph.link_list = link1;
+    graph.link_list = link1;
 
     // Display the size of the graph
-    int graph_size = get_nb_vertices(&my_graph);
+    int graph_size = get_nb_vertices(&graph);
     printf("The graph has %d vertices.\n", graph_size);
-    printf("Vertices 1 and 2 are separated by %fm.\n", distance_between(my_graph, 1, 2));
+    printf("Vertices 1 and 2 are separated by %fm.\n", distance_between(graph, 1, 2));
     
     
     
@@ -57,7 +58,7 @@ void main(){
 
     // Set the trip variable to point to the first Trip object
     Trip* trip = trip1;
-    printf("Distance trajet devrait être 8: %f\n", distance_trip(&my_graph, trip));
+    printf("Distance trajet devrait être 8: %f\n", distance_trip(&graph, trip));
 
     // Free memory
     free(link1);
