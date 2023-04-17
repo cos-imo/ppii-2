@@ -2,8 +2,8 @@
 #include <stdlib.h>
 
 #include "graph.h"
-#include "vehicle.h"
-#include "electric_station.h"
+// #include "vehicle.h"
+// #include "electric_station.h"
 
 
 
@@ -17,7 +17,7 @@ int main(int argc, char** argv){
     scanf("%d\n", &not_below);
 
     // Maximum time at same station
-    printf("Enter maximum time you can spend at the same station: ")
+    printf("Enter maximum time you can spend at the same station: ");
     scanf("%d\n", &max_time_at_station);
 
 
@@ -26,7 +26,7 @@ int main(int argc, char** argv){
     vehicle->max_time = max_time_at_station;
 
 
-    Trip final_trip = dijkstra()
+    Trip final_trip = dijkstra();
 
     return EXIT_SUCCESS;
 }
