@@ -70,12 +70,20 @@ void addLink(Graph *graph, int id_station1, int id_station2){
 }
 
 
-
 // Function to free the whole graph
-void freeGraph(Graph *graph){
+void freeVertices(Graph *graph){
     // Freeing id_station list
-    // current 
+    Vertices *current = graph->list_vertices;
+    Vertices *to_come = current->next;
+    while (to_come != NULL){
+        current->next = NULL;
+        free(current);
+        current = to_come;
+        to_come = to_come->next;
+    }
+    free(current); // Freeing last element
 }
+
 
 // Function to get the number of vertices in the graph
 int get_nb_vertices(Graph *graph) {

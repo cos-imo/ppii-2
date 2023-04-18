@@ -9,6 +9,14 @@ typedef enum Bool{
 } Bool;
 
 
+
+// Vertices type
+typedef struct Vertices{
+    int id_station;
+    struct Vertices *next;
+} Vertices;
+
+
 // Link type
 typedef struct Link{
     int id_borne_1;
@@ -20,6 +28,13 @@ typedef struct Link{
 // Graph structure
 typedef struct Graph{
     int *electric_station_id; // A changer en fonction du nom
+    Link *link_list;
+} Graph;
+
+
+// Graph structure
+typedef struct Graph{
+    Vertices *list_vertices;
     Link *link_list;
 } Graph;
 
@@ -39,6 +54,7 @@ Bool graphEmpty(Graph *graph);
 void addVertex(Graph *graph, int id_station);
 Bool vertexInGraph(Graph *graph, int id_station);
 void addLink(Graph *graph, int id_station1, int id_station2);
+void freeVertices(Graph *graph);
 int get_nb_vertices(Graph *graph);
 float distance_between(Graph graph, int id_borne1, int id_borne2);
 int distance(int idBorne1, int idBorne2);
