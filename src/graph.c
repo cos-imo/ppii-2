@@ -10,10 +10,10 @@
 
 
 // Function to create a new graph
-Graph* createGraph(int station_id){
+Graph* createGraph(int id_station){
     Graph *graph = (Graph*)malloc(sizeof(Graph));
-    graph->electric_station_id = station_id;
-    graph->link_list = NULL;
+    graph->list_vertices->id_station = id_station;
+    graph->list_vertices->next = NULL;
 
     return graph;
 }
@@ -32,45 +32,67 @@ Bool graphEmpty(Graph *graph){
 
 // Function to add a vertex to a graph
 void addVertex(Graph *graph, int id_station){
-    int *new_vertex = (int*)malloc(sizeof(int));
+    Vertices *new = (Vertices*)malloc(sizeof(Vertices));
+    new->id_station = id_station;
+    new->next = NULL;
 
-    int i = 0;
-    int current = graph->electric_station_id[0];
-    while (current != NULL){
-        current = graph->electric_station_id[i+1];
-        i++;
+    Vertices *current = graph;
+    while (current->next != NULL){
+        current = current->next;
+    }
+    
+    current->next = new;
+}
+
+
+// Function to remove last vertex put in the graph
+void removeVertex(Graph *graph){
+    Vertices *predecessor = graph->list_vertices;
+    Vertices *current = graph->list_vertices->next;
+    while (current->next != NULL){
+        predecessor = predecessor->next;
+        current = current->next;
     }
 
-    current = new_vertex;
+    // predecessor.next = current AND current.next = NULL
+    predecessor->next = NULL;
+    free(current);
 }
 
 
 // Function to know if a vertex is in the graph
 Bool vertexInGraph(Graph *graph, int id_station){
-    int n = sizeof(int) / sizeof(graph->electric_station_id);
-
-    for (int i=0; i<n; i++){
-        if (graph->electric_station_id[i] == id_station){
+    Vertices *current = graph->list_vertices;
+    while (current->next != NULL){
+        if (current->id_station == id_station){
             return TRUE;
         }
+        current = current->next;
     }
     
     return FALSE;
 }
 
 
-// Function to add a link between 2 vertices
-void addLink(Graph *graph, int id_station1, int id_station2){
+// Function to add a edge between 2 vertices
+void addEdge(Graph *graph, int id_station1, int id_station2){
     if ((vertexInGraph(graph, id_station1) && (vertexInGraph(graph, id_station2)))){
-        Link *current = graph->link_list;
+        Edges *new = (Edges*)malloc(sizeof(Edges));
+        new->id_borne_1 = id_station1;
+        new->id_borne_2 = id_station2;
+        new->next = NULL;
+        
+        Edges *current = graph->list_edges;
         while (current->next != NULL){
             current = current->next;
         }
+
+        current->next = new;
     }
 }
 
 
-// Function to free the whole graph
+// Function to free the vertices
 void freeVertices(Graph *graph){
     // Freeing id_station list
     Vertices *current = graph->list_vertices;
@@ -85,36 +107,84 @@ void freeVertices(Graph *graph){
 }
 
 
+// Function to free all edges
+void freeEdges(Graph *graph){
+    // Freeing id_station list
+    Edges *current = graph->list_edges;
+    Vertices *to_come = current->next;
+    while (to_come != NULL){
+        current->next = NULL;
+        free(current);
+        current = to_come;
+        to_come = to_come->next;
+    }
+    free(current); // Freeing last element
+}
+
+
+// Function to free all data of a graph
+void freeGraph(Graph *graph){
+    
+}
+
+
 // Function to get the number of vertices in the graph
 int get_nb_vertices(Graph *graph) {
     int size = 0;
-    Link *current_link = graph->link_list;
+    Edges *current_edge = graph->list_edges;
 
-    while (current_link != NULL) {
+    while (current_edge != NULL) {
         size++;
-        current_link = current_link->next;
+        current_edge = current_edge->next;
     }
 
     return size;
 }
 
 
+// Function to show data in a graph
+void showGraph(Graph *graph){
+    // Vertices
+    printf("Vertices :");
+    Vertices *current_vertex = graph->list_vertices;
+    while (current_vertex != NULL){
+        printf("%d", current_vertex->id_station);
+        if (current_vertex->next != NULL){
+            printf(", ");
+        }
+        current_vertex = current_vertex->next;
+    }
+    printf("\n");
+    
+    // Edges
+    Edges *current_edge = graph->list_edges;
+    while (current_edge != NULL){
+        printf("%d-%d", current_edge->id_borne_1, current_edge->id_borne_2);
+        if (current_edge->next != NULL){
+            printf(", ");
+        }
+        current_edge = current_edge->next;
+    }
+    printf("\n");
+}
+
+
 // Function to return the distance between two electric stations
 float distance_between(Graph graph, int id_station1, int id_station2){
-    Link *current_link = graph.link_list;
+    Edges *current_edge = graph.list_edges;
     
-    while (current_link != NULL){
-        if ((current_link->id_borne_1 == id_station1 && current_link->id_borne_2 == id_station2) || (current_link->id_borne_1 == id_station2 && current_link->id_borne_2 == id_station1)){
+    while (current_edge != NULL){
+        if ((current_edge->id_borne_1 == id_station1 && current_edge->id_borne_2 == id_station2) || (current_edge->id_borne_1 == id_station2 && current_edge->id_borne_2 == id_station1)){
             // We identified the two stations
             return distance(id_station1, id_station2);
         }
         else{
-            current_link = current_link->next;
+            current_edge = current_edge->next;
         }
     }
 
     // Final check on last element
-    if ((current_link->id_borne_1 == id_station1 && current_link->id_borne_2 == id_station2) || (current_link->id_borne_1 == id_station2 && current_link->id_borne_2 == id_station1)){
+    if ((current_edge->id_borne_1 == id_station1 && current_edge->id_borne_2 == id_station2) || (current_edge->id_borne_1 == id_station2 && current_edge->id_borne_2 == id_station1)){
         return distance(id_station1, id_station2);
     }
     return -1.;
@@ -129,60 +199,59 @@ int distance(int idBorne1, int idBorne2){
 
 
 // Function computing Dijkstra Algorithm
-Trip dijkstra(Graph *graph, int range, int start, int end){
-    // Initialisation des structures nécessaires
-    int n = get_nb_vertices(graph);
-    // Initialisation du tableau des distances
-    int d[n];
-    for (int i=0;i<n;i++){
-        d[i] = 40000;
-    }
-    d[start] = 0;
-    // Initialisation du tableau des prédécesseurs
-    int pre[n];
-    for (int i=0;i<n;i++){
-        pre[i] = -1;
-    }
-    // Initialisation de P : un tableau de booléens
-    int P[n];
-    for (int i=0;i<n;i++){
-        P[i] = 0;
-    }
-    P[start] = 1;
+// Trip dijkstra(Graph *graph, int range, int start, int end){
+//     // Initialisation des structures nécessaires
+//     int n = get_nb_vertices(graph);
+//     // Initialisation du tableau des distances
+//     int d[n];
+//     for (int i=0;i<n;i++){
+//         d[i] = 40000;
+//     }
+//     d[start] = 0;
+//     // Initialisation du tableau des prédécesseurs
+//     int pre[n];
+//     for (int i=0;i<n;i++){
+//         pre[i] = -1;
+//     }
+//     // Initialisation de P : un tableau de booléens
+//     int P[n];
+//     for (int i=0;i<n;i++){
+//         P[i] = 0;
+//     }
+//     P[start] = 1;
 
-    // Algorithme de Dijkstra
-    while (P[end] == 0){
-        // Recherche du sommet de distance minimale
-        int min = 40000;
-        int min_index = -1;
-        for (int i=0;i<n;i++){
-            if (P[i]==0 && d[i]<min){
-                min = d[i];
-                min_index = i;
-            }
-        }
-        // Parcours des sommets accessibles
-        for (int i=0;i<n;i++){
-            if (P[i]==0 && distance_between(graph, min_index, i) < range){
-                if (d[i] > d[min_index] + distance_between(graph, min_index, i)){
-                    d[i] = d[min_index] + distance_between(graph, min_index, i);
-                    pre[i] = min_index;
-                }
-            }
-        }
+//     // Algorithme de Dijkstra
+//     while (P[end] == 0){
+//         // Recherche du sommet de distance minimale
+//         int min = 40000;
+//         int min_index = -1;
+//         for (int i=0;i<n;i++){
+//             if (P[i]==0 && d[i]<min){
+//                 min = d[i];
+//                 min_index = i;
+//             }
+//         }
+//         // Parcours des sommets accessibles
+//         for (int i=0;i<n;i++){
+//             if (P[i]==0 && distance_between(graph, min_index, i) < range){
+//                 if (d[i] > d[min_index] + distance_between(graph, min_index, i)){
+//                     d[i] = d[min_index] + distance_between(graph, min_index, i);
+//                     pre[i] = min_index;
+//                 }
+//             }
+//         }
 
-    }
-    // Reconstruction du trajet
-    Trip trip;
-    int current = end;
-    while (current != start){
-        trip = add_to_trip(trip, current);
-        current = pre[current];
-    }
-    return trip;
-
-
-}
+//     }
+//     // Reconstruction du trajet
+//     Trip trip;
+//     int current = end;
+//     while (current != start){
+//         trip = add_to_trip(trip, current);
+//         current = pre[current];
+//     }
+    
+//     return trip;
+// }
 
 
 
@@ -313,7 +382,44 @@ float distance_trip(Graph *graph, Trip *trip){
 
 
 int main(){
-    Graph *graph = createGraph(0);
+
+
+    Graph *graph = (Graph*)malloc(sizeof(Graph));
+
+    Vertices *vertex = (Vertices*)malloc(sizeof(Vertices));
+    vertex->id_station = 0;
+    vertex->next = NULL;
+
+    Vertices *vertex_2 = (Vertices*)malloc(sizeof(Vertices));
+    vertex_2->id_station = 2;
+    vertex_2->next = NULL;
+
+    vertex->next = vertex_2;
+
+    Edges *edge = (Edges*)malloc(sizeof(Edges));
+    edge->id_borne_1 = 0;
+    edge->id_borne_2 = 2;
+    edge->next = NULL;
+    
+
+    graph->list_vertices = vertex;
+    graph->list_edges = edge;
+    
+
+    showGraph(graph);
+
+    // FREEING
+    vertex->next = NULL;
+    free(vertex_2);
+
+    graph->list_vertices = NULL;
+    free(vertex);
+
+    graph->list_edges = NULL;
+    free(edge);
+
+    free(graph);
+
 
     return EXIT_SUCCESS;
 }

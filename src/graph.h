@@ -18,24 +18,17 @@ typedef struct Vertices{
 
 
 // Link type
-typedef struct Link{
+typedef struct Edges{
     int id_borne_1;
     int id_borne_2;
-    struct Link *next;
-} Link;
-
-
-// Graph structure
-typedef struct Graph{
-    int *electric_station_id; // A changer en fonction du nom
-    Link *link_list;
-} Graph;
+    struct Edges *next;
+} Edges;
 
 
 // Graph structure
 typedef struct Graph{
     Vertices *list_vertices;
-    Link *link_list;
+    Edges *list_edges;
 } Graph;
 
 
@@ -52,10 +45,13 @@ typedef struct Trip{
 Graph* createGraph(int station_id);
 Bool graphEmpty(Graph *graph);
 void addVertex(Graph *graph, int id_station);
+void removeVertex(Graph *graph);
 Bool vertexInGraph(Graph *graph, int id_station);
 void addLink(Graph *graph, int id_station1, int id_station2);
-void freeVertices(Graph *graph);
 int get_nb_vertices(Graph *graph);
+void showGraph(Graph *graph);
+void freeVertices(Graph *graph);
+void freeLinks(Graph *graph);
 float distance_between(Graph graph, int id_borne1, int id_borne2);
 int distance(int idBorne1, int idBorne2);
 Trip dijkstra(Graph graph);
