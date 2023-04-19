@@ -8,6 +8,12 @@
 
 
 int main(int argc, char** argv){
+    Graph *graph = createGraph();
+    // for loop to create complete graph
+    //      int id_station = <extraction du nouveau sommet>;
+    //      addVertexComplete(graph, id_station); // Rend complet automatiquement
+
+
     int not_below;
     int max_time_at_station;
     //Vehicle *vehicle;
