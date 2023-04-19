@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "assert.h"
 
-#include "graph.h"
+#include "test_graph_trip.h"
 
 
 
@@ -109,6 +109,8 @@ float distance_trip(Graph *graph, Trip *trip){
     while (trip_tail != NULL) {
         int a = current_station->id_borne;
         int b = trip_tail->id_borne;
+
+        d = a + b; // Avoid errors
         
         //d += distance_between(*graph, a, b); A faire avec distance
         
@@ -134,6 +136,7 @@ int testTrip(){
     showTrip(trip);
     freeTrip(trip);
 
+    return EXIT_SUCCESS;
 }
 
 
