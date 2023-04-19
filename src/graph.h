@@ -42,9 +42,12 @@ typedef struct Trip{
 
 
 // Graph Functions
-Graph* createGraph(int id_station);
+Graph* createGraph();
+Bool verticesEmpty(Graph *graph);
+Bool edgesEmpty(Graph *graph);
 Bool graphEmpty(Graph *graph);
 void addVertex(Graph *graph, int id_station);
+void addVertexComplete(Graph *graph, int id_station);
 void removeVertex(Graph *graph, int id_station);
 Bool vertexInGraph(Graph *graph, int id_station);
 Bool edgeInGraph(Graph *graph, int id_station1, int id_station2);

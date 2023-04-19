@@ -10,30 +10,43 @@
 
 
 // Function to create a new graph
-Graph* createGraph(int id_station){
+Graph* createGraph(){
     Graph *graph = (Graph*)malloc(sizeof(Graph));
+    graph->list_edges = NULL;
     graph->list_vertices = NULL;
-    graph->list_edges = NULL;
-
-    Vertices *vertex = (Vertices*)malloc(sizeof(Vertices));
-    vertex->id_station = id_station;
-    vertex->next = NULL;
-
-    Edges *edges = (Edges*)malloc(sizeof(Edges));
-    edges->next = NULL;
-
-    graph->list_vertices = vertex;
-    graph->list_edges = NULL;
-
 
     return graph;
 }
 
 
+// Function to know if there are vertices in a graph
+Bool verticesEmpty(Graph *graph){
+    if (graph->list_vertices == NULL){
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
+
+// Function to know if there are edges in a graph
+Bool edgesEmpty(Graph *graph){
+    if (graph->list_edges == NULL){
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
 
 // Function to know if a graph is empty
 Bool graphEmpty(Graph *graph){
-    if (graph == NULL){
+    // if (graph == NULL || (graph->list_edges == NULL && graph->list_vertices == NULL)){
+    //     return TRUE;
+    // }
+    if (verticesEmpty(graph) && edgesEmpty(graph)){
         return TRUE;
     }
     else{
@@ -44,16 +57,41 @@ Bool graphEmpty(Graph *graph){
 
 // Function to add a vertex to a graph
 void addVertex(Graph *graph, int id_station){
-    Vertices *new = (Vertices*)malloc(sizeof(Vertices));
-    new->id_station = id_station;
-    new->next = NULL;
-
-    Vertices *current = graph->list_vertices;
-    while (current->next != NULL){
-        current = current->next;
+    if (verticesEmpty(graph)){
+        Vertices *vertex = (Vertices*)malloc(sizeof(Vertices));
+        vertex->id_station = id_station;
+        vertex->next = NULL;
+        graph->list_vertices = vertex;
     }
-    
-    current->next = new;
+    else{
+        if (!(vertexInGraph(graph, id_station))){
+            Vertices *new = (Vertices*)malloc(sizeof(Vertices));
+            new->id_station = id_station;
+            new->next = NULL;
+
+            Vertices *current = graph->list_vertices;
+            while (current->next != NULL){
+                current = current->next;
+            }
+            
+            current->next = new;
+        }
+    }
+}
+
+
+// Function to add a vertex and automatically make the graph complete
+void addVertexComplete(Graph *graph, int id_station){
+    addVertex(graph, id_station);
+    if (get_nb_vertices(graph) != 1){
+        Vertices *current = graph->list_vertices;
+        while (current != NULL){
+            if (current->id_station != id_station){
+                addEdge(graph, current->id_station, id_station);
+            }
+            current = current->next;
+        }
+    }
 }
 
 
@@ -63,25 +101,27 @@ void removeVertex(Graph *graph, int id_station){
         Vertices *predecessor_vertex = graph->list_vertices;
         Vertices *current_vertex = graph->list_vertices->next;
         
-        while (current_vertex->id_station != id_station){
-            predecessor_vertex = predecessor_vertex->next;
-            current_vertex = current_vertex->next;
+        if (predecessor_vertex->id_station == id_station){
+            graph->list_vertices = current_vertex;
+            free(predecessor_vertex);
+        }
+        else{
+            while (current_vertex->id_station != id_station){
+                predecessor_vertex = predecessor_vertex->next;
+                current_vertex = current_vertex->next;
+            }
+
+            predecessor_vertex->next = current_vertex->next;
+            free(current_vertex);
         }
 
-        // predecessor_vertex.next = current_vertex AND current_vertex.next = NULL
-        predecessor_vertex->next = current_vertex->next;
-        current_vertex->next = NULL;
-        free(current_vertex);
-
-
-        // // Adjust edges to remove
+        // Adjust edges to remove
         Edges *predecessor_edge = graph->list_edges;
         Edges *current_edge = graph->list_edges->next;
 
         while (current_edge != NULL){
             if (current_edge->id_borne_1 == id_station || current_edge->id_borne_2 == id_station){
                 predecessor_edge->next = current_edge->next;
-                current_edge->next = NULL;
                 free(current_edge);
                 current_edge = predecessor_edge->next;
             }
@@ -89,18 +129,17 @@ void removeVertex(Graph *graph, int id_station){
                 predecessor_edge = current_edge;
                 current_edge = current_edge->next;
             }
+        }
 
-            // Special case for first edge
-            Edges *first_edge = graph->list_edges;
-            Edges *second_edge = graph->list_edges->next;
-            if (first_edge->id_borne_1 == id_station || first_edge->id_borne_2 == id_station){
-                graph->list_edges = second_edge;
-                first_edge->next = NULL;
-                free(first_edge);
-            }
+        // Special case for first edge
+        Edges *first_edge = graph->list_edges;
+        if (first_edge->id_borne_1 == id_station || first_edge->id_borne_2 == id_station){
+            graph->list_edges = first_edge->next;
+            free(first_edge);
         }
     }
 }
+
 
 
 // Function to know if a vertex is in the graph
@@ -135,28 +174,38 @@ Bool edgeInGraph(Graph *graph, int id_station1, int id_station2){
 
 // Function to add a edge between 2 vertices
 void addEdge(Graph *graph, int id_station1, int id_station2){
-    if (!(edgeInGraph(graph, id_station1, id_station2)) && (vertexInGraph(graph, id_station1) && (vertexInGraph(graph, id_station2)))){
-    Edges *new = (Edges*)malloc(sizeof(Edges));
-    new->id_borne_1 = id_station1;
-    new->id_borne_2 = id_station2;
-    new->next = NULL;
-    
-    Edges *current = graph->list_edges;
-    while (current->next != NULL){
-        current = current->next;
-        }
+    if (edgesEmpty(graph)){
+        Edges *new = (Edges*)malloc(sizeof(Edges));
+        new->id_borne_1 = id_station1;
+        new->id_borne_2 = id_station2;
+        new->next = NULL;
 
-        current->next = new;
+        graph->list_edges = new;
     }
     else{
-        if (!(vertexInGraph(graph, id_station1))){
-            printf("\nTrying to build edge including vertex %d which is not in graph: impossible.\n\n", id_station1);
-        }
-        else if (!(vertexInGraph(graph, id_station2))){
-            printf("\nTrying to build edge including vertex %d which is not in graph: impossible.\n\n", id_station2);
+        if (!(edgeInGraph(graph, id_station1, id_station2)) && (vertexInGraph(graph, id_station1) && (vertexInGraph(graph, id_station2)))){
+            Edges *new = (Edges*)malloc(sizeof(Edges));
+            new->id_borne_1 = id_station1;
+            new->id_borne_2 = id_station2;
+            new->next = NULL;
+            
+            Edges *current = graph->list_edges;
+            while (current->next != NULL){
+                current = current->next;
+                }
+
+                current->next = new;
         }
         else{
-            printf("Edge %d-%d already exists.\n", id_station1, id_station2);
+            if (!(vertexInGraph(graph, id_station1))){
+                printf("\nTrying to build edge including vertex %d which is not in graph: impossible.\n\n", id_station1);
+            }
+            else if (!(vertexInGraph(graph, id_station2))){
+                printf("\nTrying to build edge including vertex %d which is not in graph: impossible.\n\n", id_station2);
+            }
+            else{
+                printf("\nEdge %d-%d already exists.\n", id_station1, id_station2);
+            }
         }
     }
 }
@@ -188,7 +237,7 @@ void removeEdge(Graph *graph, int id_station1, int id_station2){
     }
     
     else{
-        printf("Edge %d-%d does not exists.", id_station1, id_station2);
+        printf("Edge %d-%d does not exists.\n", id_station1, id_station2);
     }
 }
 
@@ -196,11 +245,11 @@ void removeEdge(Graph *graph, int id_station1, int id_station2){
 // Function to get the number of vertices in the graph
 int get_nb_vertices(Graph *graph) {
     int size = 0;
-    Edges *current_edge = graph->list_edges;
+    Vertices *current_vertex = graph->list_vertices;
 
-    while (current_edge != NULL) {
+    while (current_vertex != NULL) {
+        current_vertex = current_vertex->next;
         size++;
-        current_edge = current_edge->next;
     }
 
     return size;
@@ -222,6 +271,7 @@ void showGraph(Graph *graph){
     printf("\n");
     
     // Edges
+    printf("Edges: ");
     Edges *current_edge = graph->list_edges;
     while (current_edge != NULL){
         printf("%d-%d", current_edge->id_borne_1, current_edge->id_borne_2);
@@ -230,38 +280,26 @@ void showGraph(Graph *graph){
         }
         current_edge = current_edge->next;
     }
-    printf("\n");
+    printf("\n\n");
 }
 
 
 // Function to remove all data from a graph
-void freeGraph(Graph *graph){
-    Vertices *current_vertices = graph->list_vertices;
-    Vertices *vertices_to_come = current_vertices->next;
-    Edges *current_edges = graph->list_edges;
-    Edges *edges_to_come = current_edges->next;
-    
-    graph->list_edges = NULL;
-    graph->list_vertices = NULL;
+void freeGraph(Graph *graph) {
+    Vertices *vertex = graph->list_vertices;
+    while (vertex != NULL) {
+        Vertices *temp = vertex;
+        vertex = vertex->next;
+        free(temp);
+    }
 
-    // Free edges
-    while (edges_to_come != NULL){
-        current_edges->next = NULL;
-        free(current_edges);
-        current_edges = edges_to_come;
-        edges_to_come = edges_to_come->next;
+    Edges *edges = graph->list_edges;
+    while (edges != NULL) {
+        Edges *temp = edges;
+        edges = edges->next;
+        free(temp);
     }
-    free(current_edges);
-    
-    // Free vertices
-    while (vertices_to_come != NULL){
-        current_vertices->next = NULL;
-        free(current_vertices);
-        current_vertices = vertices_to_come;
-        vertices_to_come = vertices_to_come->next;
-    }
-    free(current_vertices);
-    
+
     free(graph);
 }
 
@@ -479,65 +517,5 @@ float distance_trip(Graph *graph, Trip *trip){
 
 
 int main(){
-
-
-    // Graph *graph = (Graph*)malloc(sizeof(Graph));
-    // graph->list_edges = NULL;
-    // graph->list_vertices = NULL;
-
-    // Vertices *vertex = (Vertices*)malloc(sizeof(Vertices));
-    // vertex->id_station = 0;
-    // vertex->next = NULL;
-
-    // Vertices *vertex_2 = (Vertices*)malloc(sizeof(Vertices));
-    // vertex_2->id_station = 2;
-    // vertex_2->next = NULL;
-
-    // vertex->next = vertex_2;
-
-    // Edges *edge = (Edges*)malloc(sizeof(Edges));
-    // edge->id_borne_1 = 0;
-    // edge->id_borne_2 = 2;
-    // edge->next = NULL;
-    
-
-    // graph->list_vertices = vertex;
-    // graph->list_edges = edge;
-    
-    
-    Graph *graph = createGraph(1);
-
-    
-    
-    showGraph(graph);
-
-    addVertex(graph, 9);
-    showGraph(graph);
-
-    addEdge(graph, 0, 9);
-    showGraph(graph);
-
-    addEdge(graph, 2, 9);
-    showGraph(graph);
-
-    addEdge(graph, 2, 3);
-    showGraph(graph);
-
-    addVertex(graph, 3);
-    showGraph(graph);
-    addEdge(graph, 2, 3);
-    showGraph(graph);
-
-    removeVertex(graph, 2);
-    showGraph(graph);
-
-    addEdge(graph, 0, 9);
-    showGraph(graph);
-
-
-    // FREEING
-    freeGraph(graph); // Doesn't work if 1 of the 2 lists is empty
-
-
     return EXIT_SUCCESS;
 }
