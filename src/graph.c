@@ -415,6 +415,18 @@ Bool tripEmpty(Trip *trip){
 }
 
 
+// Function to know if a station is part of the trip
+Bool stopInTrip(Trip *trip, int id_station){
+    Trip *current = trip;
+    while (current != NULL){
+        if (current->id_borne == id_station){
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+
 // Function to add an electric station to a trip
 void addStop(Trip *trip, int id_station){
     Trip *new = (Trip*)malloc(sizeof(Trip));
@@ -431,17 +443,27 @@ void addStop(Trip *trip, int id_station){
 
 
 // Function to remove last step of a trip
-void removeStop(Trip *trip){
-    Trip *predecessor = trip;
-    Trip *current = trip->next;
-    while (current->next != NULL){
-        predecessor = predecessor->next;
-        current = current->next;
+void removeStop(Trip *trip, int id_station){
+    if (stopInTrip(trip, id_station)){
+        
+        // Special case if station to remove is the first
+        if (trip->id_borne == id_station){
+            trip->next = NULL;
+            free(trip);
+        }
+        
+        else{
+            Trip *predecessor = trip;
+            Trip *current = trip->next;
+            while (current->id_borne != id_station){
+                predecessor = predecessor->next;
+                current = current->next;
+            }
+            predecessor->next = current->next;
+            current->next = NULL;
+            fre(current);
+        }
     }
-
-    // predecessor.next = current AND current.next = NULL
-    predecessor->next = NULL;
-    free(current);
 }
 
 
