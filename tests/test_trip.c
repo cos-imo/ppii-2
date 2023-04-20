@@ -17,13 +17,26 @@ Trip* createTrip(int id_station){
 
 
 // Function to tell if a trip is empty
-Bool isEmpty(Trip *trip){
+Bool tripEmpty(Trip *trip){
     if (trip == NULL){
         return TRUE;
     }
     else {
         return FALSE;
     };
+}
+
+
+// Function to know if a station is part of the trip
+Bool stopInTrip(Trip *trip, int id_station){
+    Trip *current = trip;
+    while (current != NULL){
+        if (current->id_borne == id_station){
+            return TRUE;
+        }
+        current = current->next;
+    }
+    return FALSE;
 }
 
 
@@ -43,17 +56,32 @@ void addStop(Trip *trip, int id_station){
 
 
 // Function to remove last step of a trip
-void removeStop(Trip *trip){
-    Trip *predecessor = trip;
-    Trip *current = trip->next;
-    while (current->next != NULL){
-        predecessor = predecessor->next;
-        current = current->next;
+void removeStop(Trip *trip, int id_station){
+    if (stopInTrip(trip, id_station)){
+        printf("Stop is in trip");
+        // Special case if station to remove is the first
+        if (trip->id_borne == id_station){
+            printf("First element is to remove");
+            Trip *temp = trip;
+            *trip = *trip->next;
+            free(temp);
+        }
+        
+        else{
+            Trip *predecessor = trip;
+            Trip *current = trip->next;
+            while (current->id_borne != id_station){
+                predecessor = predecessor->next;
+                current = current->next;
+            }
+            predecessor->next = current->next;
+            current->next = NULL;
+            free(current);
+        }
     }
-
-    // predecessor.next = current AND current.next = NULL
-    predecessor->next = NULL;
-    free(current);
+    else{
+        printf("\nTrying to remove stop %d which isn't in the trip.\n\n", id_station);
+    }
 }
 
 
@@ -87,15 +115,20 @@ void showTrip(Trip *trip){
 
 // Function to free memory of a trip
 void freeTrip(Trip *trip){
-    Trip *current = trip;
-    Trip *to_come = trip->next;
-    while (to_come != NULL){
-        current->next = NULL;
-        free(current);
-        current = to_come;
-        to_come = to_come->next;
+    if (tripEmpty(trip)){
+        free(trip);
     }
-    free(current); // Freeing last element
+    else{
+        Trip *current = trip;
+        Trip *to_come = trip->next;
+        while (to_come != NULL){
+            current->next = NULL;
+            free(current);
+            current = to_come;
+            to_come = to_come->next;
+        }
+        free(current); // Freeing last element
+    }
 }
 
 
@@ -128,13 +161,27 @@ int testTrip(){
     Trip *trip = createTrip(1);
     addStop(trip, 2);
     showTrip(trip);
+    
     addStop(trip, 4);
     showTrip(trip);
+    
     addStop(trip, 8);
     showTrip(trip);
-    removeStop(trip);
+    
+    removeStop(trip, 8);
     showTrip(trip);
-    freeTrip(trip);
+
+    removeStop(trip, 2);
+    showTrip(trip);
+
+    removeStop(trip, 7);
+    showTrip(trip);
+
+    removeStop(trip, 1);
+    showTrip(trip);
+
+    free(trip);
+    // freeTrip(trip);
 
     return EXIT_SUCCESS;
 }
@@ -143,5 +190,6 @@ int testTrip(){
 
 int main(){
     testTrip();
+    
     return EXIT_SUCCESS;
 }
