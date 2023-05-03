@@ -12,7 +12,7 @@ int init_vehicule(){
 	v->modele = modele_str;
 	v->capacite = 0;
 	v->consommation = 0;
-	v-> charge = 100;
+	v->charge = 100;
 	v->temps_chargement = 0;
 	v->latitude = 0;
 	v->longitude = 0;
