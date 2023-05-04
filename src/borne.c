@@ -2,6 +2,7 @@
 #include <math.h>
 
 #define RAYON_TERRE 6371.0 // Rayon de la Terre
+#define M_PI 3.1416
 
 // Structure BorneElectrique
 typedef struct {
@@ -13,17 +14,20 @@ typedef struct {
 } BorneElectrique;
 
 // Distance entre deux coordonnées GPS (pas touche au nom, Kieran)
-double distance(double lat1, double long1, double lat2, double long2) {
-    double lat1Rad = lat1 * M_PI / 180.0; // Conversion en rad
-    double long1Rad = long1 * M_PI / 180.0;
-    double lat2Rad = lat2 * M_PI / 180.0;
-    double long2Rad = long2 * M_PI / 180.0;
+int distance(int id1, int id2, BorneElectrique tableauBornes[]) {
+    BorneElectrique borne1 = tableauBornes[id1];
+    BorneElectrique borne2 = tableauBornes[id2];
+    
+    double lat1Rad = borne1.latitude * M_PI / 180.0;
+    double long1Rad = borne1.longitude * M_PI / 180.0;
+    double lat2Rad = borne2.latitude * M_PI / 180.0;
+    double long2Rad = borne2.longitude * M_PI / 180.0;
     
     double deltaLong = long2Rad - long1Rad;
     
     double distance = acos(sin(lat1Rad)*sin(lat2Rad) + cos(lat1Rad)*cos(lat2Rad)*cos(deltaLong)) * RAYON_TERRE;
     
-    return distance;
+    return (int) round(distance);
 }
 
 // Fonction qui trouve la borne la plus proche de coordonnées GPS données
