@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "graph.h"
+
 
 
 Trip dijkstra(int n, Graph *graph, int range, int start, int end){
@@ -45,6 +47,7 @@ Trip dijkstra(int n, Graph *graph, int range, int start, int end){
         }
 
     }
+    
     // Reconstruction du trajet
     Trip trip;
     int current = end;
@@ -52,7 +55,6 @@ Trip dijkstra(int n, Graph *graph, int range, int start, int end){
         trip = add_to_trip(trip, current);
         current = pre[current];
     }
+    
     return trip;
-
-
 }

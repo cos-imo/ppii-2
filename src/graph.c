@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "graph.h"
-//#include "electric_station.h"
+#include "borne.h"
 
 
 
@@ -139,7 +140,6 @@ void removeVertex(Graph *graph, int id_station){
         }
     }
 }
-
 
 
 // Function to know if a vertex is in the graph
@@ -326,68 +326,75 @@ float distance_between(Graph graph, int id_station1, int id_station2){
 }
 
 
-// Function to compute the distance between 2 vertices
-int distance(int idBorne1, int idBorne2){
-    // A toi Thomas
-    return idBorne1 + idBorne2; // Pour pas avoir d'erreur...
+// Distance entre deux coordonnées GPS
+double distance(double lat1, double long1, double lat2, double long2) {
+    double lat1Rad = lat1 * M_PI / 180.0; // Conversion en rad
+    double long1Rad = long1 * M_PI / 180.0;
+    double lat2Rad = lat2 * M_PI / 180.0;
+    double long2Rad = long2 * M_PI / 180.0;
+    
+    double deltaLong = long2Rad - long1Rad;
+    
+    double distance = acos(sin(lat1Rad)*sin(lat2Rad) + cos(lat1Rad)*cos(lat2Rad)*cos(deltaLong)) * RAYON_TERRE;
+    
+    return distance;
 }
 
 
 // Function computing Dijkstra Algorithm
-// Trip dijkstra(Graph *graph, int range, int start, int end){
-//     // Initialisation des structures nécessaires
-//     int n = get_nb_vertices(graph);
-//     // Initialisation du tableau des distances
-//     int d[n];
-//     for (int i=0;i<n;i++){
-//         d[i] = 40000;
-//     }
-//     d[start] = 0;
-//     // Initialisation du tableau des prédécesseurs
-//     int pre[n];
-//     for (int i=0;i<n;i++){
-//         pre[i] = -1;
-//     }
-//     // Initialisation de P : un tableau de booléens
-//     int P[n];
-//     for (int i=0;i<n;i++){
-//         P[i] = 0;
-//     }
-//     P[start] = 1;
+Trip dijkstra(int n, Graph *graph, int range, int start, int end){
+    // Initialisation des structures nécessaires
+    // Initialisation du tableau des distances
+    int d[n];
+    for (int i=0;i<n;i++){
+        d[i] = 40000;
+    }
+    d[start] = 0;
+    // Initialisation du tableau des prédécesseurs
+    int pre[n];
+    for (int i=0;i<n;i++){
+        pre[i] = -1;
+    }
+    // Initialisation de P : un tableau de booléens
+    int P[n];
+    for (int i=0;i<n;i++){
+        P[i] = 0;
+    }
+    P[start] = 1;
 
-//     // Algorithme de Dijkstra
-//     while (P[end] == 0){
-//         // Recherche du sommet de distance minimale
-//         int min = 40000;
-//         int min_index = -1;
-//         for (int i=0;i<n;i++){
-//             if (P[i]==0 && d[i]<min){
-//                 min = d[i];
-//                 min_index = i;
-//             }
-//         }
-//         // Parcours des sommets accessibles
-//         for (int i=0;i<n;i++){
-//             if (P[i]==0 && distance_between(graph, min_index, i) < range){
-//                 if (d[i] > d[min_index] + distance_between(graph, min_index, i)){
-//                     d[i] = d[min_index] + distance_between(graph, min_index, i);
-//                     pre[i] = min_index;
-//                 }
-//             }
-//         }
+    // Algorithme de Dijkstra
+    while (P[end] == 0){
+        // Recherche du sommet de distance minimale
+        int min = 40000;
+        int min_index = -1;
+        for (int i=0;i<n;i++){
+            if (P[i]==0 && d[i]<min){
+                min = d[i];
+                min_index = i;
+            }
+        }
+        // Parcours des sommets accessibles
+        for (int i=0;i<n;i++){
+            if (P[i]==0 && distance_between(graph, min_index, i) < range){
+                if (d[i] > d[min_index] + distance_between(graph, min_index, i)){
+                    d[i] = d[min_index] + distance_between(graph, min_index, i);
+                    pre[i] = min_index;
+                }
+            }
+        }
 
-//     }
-//     // Reconstruction du trajet
-//     Trip trip;
-//     int current = end;
-//     while (current != start){
-//         trip = add_to_trip(trip, current);
-//         current = pre[current];
-//     }
+    }
     
-//     return trip;
-// }
-
+    // Reconstruction du trajet
+    Trip trip;
+    int current = end;
+    while (current != start){
+        trip = add_to_trip(trip, current);
+        current = pre[current];
+    }
+    
+    return trip;
+}
 
 
 

@@ -12,7 +12,7 @@ typedef struct {
     double longitude;
 } BorneElectrique;
 
-// Distance entre deux coordonnées GPS (pas touche au nom, Kieran)
+// Distance entre deux coordonnées GPS
 double distance(double lat1, double long1, double lat2, double long2) {
     double lat1Rad = lat1 * M_PI / 180.0; // Conversion en rad
     double long1Rad = long1 * M_PI / 180.0;
