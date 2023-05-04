@@ -5,9 +5,8 @@
 
 
 
-Trip *dijkstra(Graph *graph, float range, int start, int end){
+Trip *dijkstra(BorneElectrique tableauBornes, int n, float range, int start, int end){
     // Initialisation des structures nécessaires
-    int n = get_nb_vertices(graph);
     // Initialisation du tableau des distances
     int d[n];
     for (int i=0;i<n;i++){
@@ -39,9 +38,10 @@ Trip *dijkstra(Graph *graph, float range, int start, int end){
         }
         // Parcours des sommets accessibles
         for (int i=0;i<n;i++){
-            if (P[i]==0 && distance_between(*graph, min_index, i) < range){
-                if (d[i] > d[min_index] + distance_between(*graph, min_index, i)){
-                    d[i] = d[min_index] + distance_between(*graph, min_index, i);
+            int d = distance(min_index, i, tableauBornes);
+            if (P[i]==0 && d < range){
+                if (d[i] > d[min_index] + d){
+                    d[i] = d[min_index] + d;
                     pre[i] = min_index;
                 }
             }
