@@ -8,7 +8,7 @@
 
 
 int main(int argc, char** argv){
-    Graph *graph = createGraph();
+    // Graph *graph = createGraph();
     // for loop to create complete graph
     //      int id_station = <extraction du nouveau sommet>;
     //      addVertexComplete(graph, id_station); // Rend complet automatiquement

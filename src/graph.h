@@ -34,7 +34,7 @@ typedef struct Graph{
 
 // Trip structure
 typedef struct Trip{
-    int id_borne;
+    int id_borne; // Place de la borne dans le tableau de bornes
     struct Trip *next;
 } Trip;
 
