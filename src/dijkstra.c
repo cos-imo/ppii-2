@@ -1,10 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "dijkstra.h"
+#include "borne.c"
 
 
 
-Trip dijkstra(int n, Graph *graph, int range, int start, int end){
+Trip *dijkstra(Graph *graph, float range, int start, int end){
     // Initialisation des structures nécessaires
+    int n = get_nb_vertices(graph);
     // Initialisation du tableau des distances
     int d[n];
     for (int i=0;i<n;i++){
@@ -26,19 +29,19 @@ Trip dijkstra(int n, Graph *graph, int range, int start, int end){
     // Algorithme de Dijkstra
     while (P[end] == 0){
         // Recherche du sommet de distance minimale
-        int min = 40000;
+        int min = -1;
         int min_index = -1;
         for (int i=0;i<n;i++){
-            if (P[i]==0 && d[i]<min){
+            if (P[i]==0 && (d[i]<min || min==-1)){
                 min = d[i];
                 min_index = i;
             }
         }
         // Parcours des sommets accessibles
         for (int i=0;i<n;i++){
-            if (P[i]==0 && distance_between(graph, min_index, i) < range){
-                if (d[i] > d[min_index] + distance_between(graph, min_index, i)){
-                    d[i] = d[min_index] + distance_between(graph, min_index, i);
+            if (P[i]==0 && distance_between(*graph, min_index, i) < range){
+                if (d[i] > d[min_index] + distance_between(*graph, min_index, i)){
+                    d[i] = d[min_index] + distance_between(*graph, min_index, i);
                     pre[i] = min_index;
                 }
             }
@@ -46,10 +49,10 @@ Trip dijkstra(int n, Graph *graph, int range, int start, int end){
 
     }
     // Reconstruction du trajet
-    Trip trip;
+    Trip *trip;
     int current = end;
     while (current != start){
-        trip = add_to_trip(trip, current);
+        addStop(trip, current);
         current = pre[current];
     }
     return trip;

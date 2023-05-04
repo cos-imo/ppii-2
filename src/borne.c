@@ -2,6 +2,7 @@
 #include <math.h>
 
 #define RAYON_TERRE 6371.0 // Rayon de la Terre
+#define M_PI 3.14159265358979323846 // Valeur de pi
 
 // Structure BorneElectrique
 typedef struct {
@@ -32,9 +33,9 @@ BorneElectrique trouverBorneLaPlusProche(double lat, double lon, BorneElectrique
     BorneElectrique borneLaPlusProche; // Initialisation de la borne la plus proche
     
     for (size_t i = 0; i < nbBornes; i++) {
-        double distance = distance(lat, lon, tableauBornes[i].latitude, tableauBornes[i].longitude);
-        if (distance < distanceMin) {
-            distanceMin = distance;
+        double distance_tmp = distance(lat, lon, tableauBornes[i].latitude, tableauBornes[i].longitude);
+        if (distance_tmp < distanceMin) {
+            distanceMin = distance_tmp;
             borneLaPlusProche = tableauBornes[i];
         }
     }

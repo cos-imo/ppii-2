@@ -20,6 +20,10 @@ graph: graph.o
 	$(CC) $(CFLAGS) -o graph graph.o
 graph.o: graph.c
 
+# Graph File
+graphe_borne: graphe_borne.o
+	$(CC) $(CFLAGS) -o graphe_borne graphe_borne.o
+graphe_borne.o: graphe_borne.c
 
 # # Vehicle File
 # vehicle: vehicle.o
