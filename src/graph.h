@@ -58,11 +58,11 @@ void showGraph(Graph *graph);
 void freeGraph(Graph *graph);
 float distance_between(Graph graph, int id_borne1, int id_borne2);
 int distance(int idBorne1, int idBorne2);
-Trip dijkstra(Graph graph);
+Trip dijkstra(int n, Graph *graph, int range, int start, int end);
 
 
 // Trip Functions
-Trip* createTrip(int id_station);
+Trip* createTrip(void);
 Bool tripEmpty(Trip *trip);
 Bool stopInTrip(Trip *trip, int id_station);
 void addStop(Trip *trip, int id_station);

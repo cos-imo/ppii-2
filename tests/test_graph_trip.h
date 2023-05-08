@@ -62,7 +62,7 @@ Trip dijkstra(Graph graph);
 
 
 // Trip Functions
-Trip* createTrip(int id_station);
+Trip* createTrip(void);
 Bool tripEmpty(Trip *trip);
 Bool stopInTrip(Trip *trip, int id_station);
 void addStop(Trip *trip, int id_station);

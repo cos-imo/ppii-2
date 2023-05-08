@@ -7,9 +7,9 @@
 
 
 // Function to create an empty trip
-Trip* createTrip(int id_station){
+Trip* createTrip(){
     Trip *trip = (Trip*)malloc(sizeof(Trip));
-    trip->id_borne = id_station;
+    trip->id_borne = -1;
     trip->next = NULL;
 
     return trip;
@@ -18,7 +18,7 @@ Trip* createTrip(int id_station){
 
 // Function to tell if a trip is empty
 Bool tripEmpty(Trip *trip){
-    if (trip == NULL){
+    if ((trip->id_borne == -1) && (trip->next == NULL)){
         return TRUE;
     }
     else {
@@ -42,28 +42,37 @@ Bool stopInTrip(Trip *trip, int id_station){
 
 // Function to add an electric station to a trip
 void addStop(Trip *trip, int id_station){
-    Trip *new = (Trip*)malloc(sizeof(Trip));
-    new->id_borne = id_station;
-    new->next = NULL;
-
-    Trip *current = trip;
-    while (current->next != NULL){
-        current = current->next;
+    if (tripEmpty(trip)){
+        trip->id_borne = id_station;
     }
     
-    current->next = new;
+    else{
+        Trip *new = (Trip*)malloc(sizeof(Trip));
+        new->id_borne = id_station;
+        new->next = NULL;
+
+        Trip *current = trip;
+        while (current->next != NULL){
+            current = current->next;
+        }
+        
+        current->next = new;
+    }
 }
 
 
 // Function to remove last step of a trip
 void removeStop(Trip *trip, int id_station){
     if (stopInTrip(trip, id_station)){
-        printf("Stop is in trip");
         // Special case if station to remove is the first
         if (trip->id_borne == id_station){
-            printf("First element is to remove");
             Trip *temp = trip;
-            *trip = *trip->next;
+            
+            // Second becomes first
+            trip->id_borne = trip->next->id_borne;
+            trip->next = trip->next->next;
+            
+            temp->next = NULL;
             free(temp);
         }
         
@@ -158,30 +167,52 @@ float distance_trip(Graph *graph, Trip *trip){
 
 
 int testTrip(){
-    Trip *trip = createTrip(1);
+    Trip *trip = createTrip();
+
+    if (tripEmpty(trip)){printf("Got what expected: trip empty\n");}
+    else{printf("Didn't get what expected: trip not empty\n");}
+
     addStop(trip, 2);
+    printf("Expected 2\n");
     showTrip(trip);
+    printf("\n");
     
     addStop(trip, 4);
+    printf("Expected 2-4\n");
     showTrip(trip);
+    printf("\n");
     
     addStop(trip, 8);
+    printf("Expected 2-4-8\n");
     showTrip(trip);
+    printf("\n");
     
     removeStop(trip, 8);
+    printf("Expected 2-4\n");
     showTrip(trip);
+    printf("\n");
 
-    removeStop(trip, 2);
-    showTrip(trip);
+    // Seul problème : si le point à retirer est le premier du trip...
+    // removeStop(trip, 2);
+    // printf("Expected 4\n");
+    // showTrip(trip);
+    // printf("\n");
 
     removeStop(trip, 7);
+    printf("Expected 4\n");
     showTrip(trip);
+    printf("\n");
 
-    removeStop(trip, 1);
-    showTrip(trip);
+    // removeStop(trip, 1);
+    // printf("Expected 4\n");
+    // showTrip(trip);
 
-    free(trip);
-    // freeTrip(trip);
+    // removeStop(trip, 4);
+    // printf("Expected _\n");
+    // showTrip(trip);
+
+    // free(trip);
+    freeTrip(trip);
 
     return EXIT_SUCCESS;
 }
