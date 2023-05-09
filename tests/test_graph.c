@@ -81,6 +81,7 @@ void addVertex(Graph *graph, int id_station){
 
 // Function to add a vertex and automatically make the graph complete
 void addVertexComplete(Graph *graph, int id_station){
+    printf("\nAdding vertex %d\n", id_station);
     addVertex(graph, id_station);
     if (get_nb_vertices(graph) != 1){
         Vertices *current = graph->list_vertices;
@@ -203,7 +204,7 @@ void addEdge(Graph *graph, int id_station1, int id_station2){
                 printf("\nTrying to build edge including vertex %d which is not in graph: impossible.\n\n", id_station2);
             }
             else{
-                printf("\nEdge %d-%d already exists.\n", id_station1, id_station2);
+                printf("\nEdge %d-%d already exists.\n\n", id_station1, id_station2);
             }
         }
     }
@@ -257,29 +258,34 @@ int get_nb_vertices(Graph *graph) {
 
 // Function to show data in a graph
 void showGraph(Graph *graph){
-    // Vertices
-    printf("Vertices: ");
-    Vertices *current_vertex = graph->list_vertices;
-    while (current_vertex != NULL){
-        printf("%d", current_vertex->id_station);
-        if (current_vertex->next != NULL){
-            printf(", ");
-        }
-        current_vertex = current_vertex->next;
+    if (graphEmpty(graph)){
+        printf("Graph is empty\n");
     }
-    printf("\n");
-    
-    // Edges
-    printf("Edges: ");
-    Edges *current_edge = graph->list_edges;
-    while (current_edge != NULL){
-        printf("%d-%d", current_edge->id_borne_1, current_edge->id_borne_2);
-        if (current_edge->next != NULL){
-            printf(", ");
+    else{
+        // Vertices
+        printf("Vertices: ");
+        Vertices *current_vertex = graph->list_vertices;
+        while (current_vertex != NULL){
+            printf("%d", current_vertex->id_station);
+            if (current_vertex->next != NULL){
+                printf(", ");
+            }
+            current_vertex = current_vertex->next;
         }
-        current_edge = current_edge->next;
+        printf("\n");
+        
+        // Edges
+        printf("Edges: ");
+        Edges *current_edge = graph->list_edges;
+        while (current_edge != NULL){
+            printf("%d-%d", current_edge->id_borne_1, current_edge->id_borne_2);
+            if (current_edge->next != NULL){
+                printf(", ");
+            }
+            current_edge = current_edge->next;
+        }
+        printf("\n");
     }
-    printf("\n\n");
 }
 
 
@@ -308,10 +314,15 @@ void freeGraph(Graph *graph) {
 int testGraph(){
     // Creating empty graph
     Graph *graph = createGraph();
+    assert(verticesEmpty(graph) == TRUE);
+    assert(edgesEmpty(graph) == TRUE);
+    assert(get_nb_vertices(graph) == 0);
     showGraph(graph);
 
     // Adding vertices and making the graph complete at the same time
     addVertexComplete(graph, 0);
+    assert(verticesEmpty(graph) == FALSE);
+    assert(edgesEmpty(graph) == TRUE);
     showGraph(graph);
 
     addVertexComplete(graph, 2);
