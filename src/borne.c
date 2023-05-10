@@ -2,7 +2,7 @@
 #include <math.h>
 
 #define RAYON_TERRE 6371.0 // Rayon de la Terre
-#define M_PI 3.1416
+//#define M_PI 3.1416
 
 // Structure BorneElectrique
 typedef struct {
@@ -31,14 +31,14 @@ int distance(int id1, int id2, BorneElectrique tableauBornes[]) {
 }
 
 // Fonction qui trouve la borne la plus proche de coordonnées GPS données
-BorneElectrique trouverBorneLaPlusProche(double lat, double lon, BorneElectrique tableauBornes[], int nbBornes) {
+BorneElectrique trouverBorneLaPlusProche(BorneElectrique tableauBornes[], int nbBornes) {
     double distanceMin = INFINITY; // Initialisation de la distance minimale à l'infini
     BorneElectrique borneLaPlusProche; // Initialisation de la borne la plus proche
     
-    for (size_t i = 0; i < nbBornes; i++) {
-        double distance = distance(lat, lon, tableauBornes[i].latitude, tableauBornes[i].longitude);
-        if (distance < distanceMin) {
-            distanceMin = distance;
+    for (int i = 2; i < nbBornes; i++) {
+        double d = distance(0, i, tableauBornes);
+        if (d < distanceMin) {
+            distanceMin = d;
             borneLaPlusProche = tableauBornes[i];
         }
     }
@@ -59,7 +59,7 @@ int main() {
     // Recherche de la borne la plus proche d'une position GPS donnée
     double latitude = 48.8584;
     double longitude = 2.2945;
-    BorneElectrique borneProche = trouverBorneLaPlusProche(latitude, longitude, tableauBornes, sizeof(tableauBornes)/sizeof(tableauBornes[0]));
+    BorneElectrique borneProche = trouverBorneLaPlusProche(tableauBornes, sizeof(tableauBornes)/sizeof(tableauBornes[0]));
     
     // Affichage des informations sur la borne la plus proche
     printf("La borne la plus proche de la position (%f, %f) est la borne %d, située à la position (%f, %f)\n", latitude, longitude, borneProche.id, borneProche.latitude, borneProche.longitude);
