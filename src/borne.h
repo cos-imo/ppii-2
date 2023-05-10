@@ -8,3 +8,8 @@ typedef struct {
     double latitude;
     double longitude;
 } BorneElectrique;
+
+
+
+// Borne Functions
+int distance(int id1, int id2, BorneElectrique tableauBornes[]);

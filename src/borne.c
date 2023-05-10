@@ -3,6 +3,7 @@
 #include <math.h>
 
 #include "borne.h"
+#include "trip.h"
 
 
 // Distance entre deux coordonnées GPS (pas touche au nom, Kieran)
@@ -38,6 +39,40 @@ BorneElectrique trouverBorneLaPlusProche(BorneElectrique tableauBornes[], int nb
     
     return borneLaPlusProche;
 }
+
+
+//Function to compute the total distance of a trip
+float distance_trip(Trip *trip, BorneElectrique tableauBornes[]){
+    int total_distance= 0;
+    
+    Trip *current_station = trip;
+    Trip *trip_tail = trip->next;
+
+    while (trip_tail != NULL) {
+        int a = current_station->id_borne;
+        int b = trip_tail->id_borne;
+
+       total_distance += distance(a, b, tableauBornes);
+        
+        // Moving to next stop
+        current_station = trip_tail;
+        trip_tail = trip_tail->next;
+    }
+
+    return total_distance;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main() {
     // Test pour un tableau de bornes random

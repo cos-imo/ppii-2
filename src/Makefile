@@ -5,7 +5,7 @@ CFLAGS=-Wall -Wextra -pedantic -O0 -g3 -fsanitize=address
 ALL_EXECUTABLES=graph main borne # Ajouter tous les executables au fur et à mesure
 
 
-all: graph main borne  # Pareil ici
+all: graph main borne dijkstra # Pareil ici
 
 
 # main file
@@ -27,7 +27,7 @@ graph.o: graph.c
 # vehicle.o: vehicle.c
 
 
-# # Electri Station File
+# # Electric Station File
 # electric_station: electric_station.o
 # 	$(CC) $(CFLAGS) -o electric_station electric_station.o
 # electric_station.o: electric_station.c

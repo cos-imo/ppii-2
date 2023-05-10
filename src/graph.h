@@ -28,10 +28,6 @@ typedef struct Graph{
 
 
 
-
-
-
-
 // Graph Functions
 Graph* createGraph();
 Bool verticesEmpty(Graph *graph);
@@ -48,7 +44,6 @@ int get_nb_vertices(Graph *graph);
 void showGraph(Graph *graph);
 void freeGraph(Graph *graph);
 float distance_between(Graph graph, int id_borne1, int id_borne2);
-int distance(int idBorne1, int idBorne2);
 
 
 

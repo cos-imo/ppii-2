@@ -304,52 +304,6 @@ void freeGraph(Graph *graph) {
 }
 
 
-// // Function to return the distance between two electric stations
-// float distance_between(Graph graph, int id_station1, int id_station2){
-//     Edges *current_edge = graph.list_edges;
-    
-//     while (current_edge != NULL){
-//         if ((current_edge->id_borne_1 == id_station1 && current_edge->id_borne_2 == id_station2) || (current_edge->id_borne_1 == id_station2 && current_edge->id_borne_2 == id_station1)){
-//             // We identified the two stations
-//             return distance(id_station1, id_station2);
-//         }
-//         else{
-//             current_edge = current_edge->next;
-//         }
-//     }
-
-//     // Final check on last element
-//     if ((current_edge->id_borne_1 == id_station1 && current_edge->id_borne_2 == id_station2) || (current_edge->id_borne_1 == id_station2 && current_edge->id_borne_2 == id_station1)){
-//         return distance(id_station1, id_station2);
-//     }
-//     return -1.;
-// }
-
-
-// // Distance entre deux coordonnées GPS
-// double distance(double lat1, double long1, double lat2, double long2) {
-//     double lat1Rad = lat1 * M_PI / 180.0; // Conversion en rad
-//     double long1Rad = long1 * M_PI / 180.0;
-//     double lat2Rad = lat2 * M_PI / 180.0;
-//     double long2Rad = long2 * M_PI / 180.0;
-    
-//     double deltaLong = long2Rad - long1Rad;
-    
-//     double distance = acos(sin(lat1Rad)*sin(lat2Rad) + cos(lat1Rad)*cos(lat2Rad)*cos(deltaLong)) * RAYON_TERRE;
-    
-//     return distance;
-// }
-
-
-
-
-
-
-// ----------------------- Trip Functions -----------------------
-
-
-
-
 
 
 
@@ -358,25 +312,7 @@ void freeGraph(Graph *graph) {
 
 // REFAIRE AVEC BONNE FONCTION DISTANCE
 
-// Function to compute the total distance of a trip
-// float distance_trip(Graph *graph, Trip *trip){
-//     int d = 0;
-    
-//     Trip *current_station = trip;
-//     Trip *trip_tail = trip->next;
 
-//     while (trip_tail != NULL) {
-//         int a = current_station->id_borne;
-//         int b = trip_tail->id_borne;
-
-//         d = a + b; // Avoid errors
-        
-//         //d += distance_between(*graph, a, b); A faire avec distance
-        
-//         // Moving to next stop
-//         current_station = trip_tail;
-//         trip_tail = trip_tail->next;
-//     }
 
 
 //     return d;

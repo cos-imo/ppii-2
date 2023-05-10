@@ -9,17 +9,20 @@
 // Function computing Dijkstra Algorithm
 Trip dijkstra(int n, Graph *graph, int range, int start, int end){
     // Initialisation des structures nécessaires
+    
     // Initialisation du tableau des distances
     int d[n];
     for (int i=0;i<n;i++){
         d[i] = 40000;
     }
     d[start] = 0;
+
     // Initialisation du tableau des prédécesseurs
     int pre[n];
     for (int i=0;i<n;i++){
         pre[i] = -1;
     }
+    
     // Initialisation de P : un tableau de booléens
     int P[n];
     for (int i=0;i<n;i++){
