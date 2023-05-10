@@ -306,20 +306,6 @@ void freeGraph(Graph *graph) {
 
 
 
-
-
-// ------------------ Graph and Trip Functions ------------------
-
-// REFAIRE AVEC BONNE FONCTION DISTANCE
-
-
-
-
-//     return d;
-// }
-
-
-
 int main(){
     return EXIT_SUCCESS;
 }
