@@ -7,7 +7,7 @@
 
 Trip *dijkstra(BorneElectrique tableauBornes, int n, float range, int start, int end){
     // Initialisation des structures nécessaires
-    // Initialisation du tableau des distances
+    // Initialisation du tableau des distances depuis la borne de départ
     int d[n];
     for (int i=0;i<n;i++){
         d[i] = 40000;
@@ -38,10 +38,10 @@ Trip *dijkstra(BorneElectrique tableauBornes, int n, float range, int start, int
         }
         // Parcours des sommets accessibles
         for (int i=0;i<n;i++){
-            int d = distance(min_index, i, tableauBornes);
-            if (P[i]==0 && d < range){
-                if (d[i] > d[min_index] + d){
-                    d[i] = d[min_index] + d;
+            int dist = distance(min_index, i, tableauBornes);
+            if (P[i]==0 && dist < range){
+                if (d[i] > d[min_index] + dist){
+                    d[i] = d[min_index] + dist;
                     pre[i] = min_index;
                 }
             }
