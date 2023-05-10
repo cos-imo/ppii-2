@@ -43,13 +43,6 @@ void removeEdge(Graph *graph, int id_station1, int id_station2);
 int get_nb_vertices(Graph *graph);
 void showGraph(Graph *graph);
 void freeGraph(Graph *graph);
-float distance_between(Graph graph, int id_borne1, int id_borne2);
-
-
-
-// Graph and Trip Functions
-float distance_trip(Graph *graph, Trip *trip);
-Trip dijkstra(int n, Graph *graph, int range, int start, int end);
 
 
 #endif

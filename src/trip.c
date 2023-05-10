@@ -1,4 +1,7 @@
-#include "graph.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+
 #include "trip.h"
 
 
@@ -135,3 +138,8 @@ void freeTrip(Trip *trip){
         free(current); // Freeing last element
     }
 }
+
+
+// int main(void){
+//     return EXIT_SUCCESS;
+// }

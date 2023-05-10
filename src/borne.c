@@ -7,7 +7,7 @@
 
 
 // Distance entre deux coordonnées GPS (pas touche au nom, Kieran)
-int distance(int id1, int id2, BorneElectrique tableauBornes[]) {
+int distance(BorneElectrique tableauBornes[], int id1, int id2){
     BorneElectrique borne1 = tableauBornes[id1];
     BorneElectrique borne2 = tableauBornes[id2];
     
@@ -25,12 +25,12 @@ int distance(int id1, int id2, BorneElectrique tableauBornes[]) {
 
 
 // Fonction qui trouve la borne la plus proche de coordonnées GPS données
-BorneElectrique trouverBorneLaPlusProche(BorneElectrique tableauBornes[], int nbBornes) {
+BorneElectrique trouverBorneLaPlusProche(BorneElectrique tableauBornes[], int nbBornes){
     double distanceMin = INFINITY; // Initialisation de la distance minimale à l'infini
     BorneElectrique borneLaPlusProche; // Initialisation de la borne la plus proche
     
     for (int i = 2; i < nbBornes; i++) {
-        double d = distance(0, i, tableauBornes);
+        int d = distance(tableauBornes, 0, i);
         if (d < distanceMin) {
             distanceMin = d;
             borneLaPlusProche = tableauBornes[i];
@@ -52,7 +52,7 @@ float distance_trip(Trip *trip, BorneElectrique tableauBornes[]){
         int a = current_station->id_borne;
         int b = trip_tail->id_borne;
 
-       total_distance += distance(a, b, tableauBornes);
+       total_distance += distance(tableauBornes, a, b);
         
         // Moving to next stop
         current_station = trip_tail;
@@ -95,6 +95,6 @@ float distance_trip(Trip *trip, BorneElectrique tableauBornes[]){
 //     return EXIT_SUCCESS;
 // }
 
-int main(){
-    return EXIT_SUCCESS;
-}
+// int main(){
+//     return EXIT_SUCCESS;
+// }

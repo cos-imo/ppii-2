@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "graph.h"
-#include "trip.h"
+// #include "graph.h"
+// #include "trip.h"
+#include "dijkstra.h"
 
 
 
 // Function computing Dijkstra Algorithm
-Trip dijkstra(int n, Graph *graph, int range, int start, int end){
+Trip dijkstra(int n, BorneElectrique electric_stations[], int range, int start, int end){
     // Initialisation des structures nécessaires
     
     // Initialisation du tableau des distances
@@ -43,9 +44,9 @@ Trip dijkstra(int n, Graph *graph, int range, int start, int end){
         }
         // Parcours des sommets accessibles
         for (int i=0;i<n;i++){
-            if (P[i]==0 && distance_between(*graph, min_index, i) < range){
-                if (d[i] > d[min_index] + distance_between(*graph, min_index, i)){
-                    d[i] = d[min_index] + distance_between(*graph, min_index, i);
+            if (P[i]==0 && distance(electric_stations, min_index, i) < range){
+                if (d[i] > d[min_index] + distance(electric_stations, min_index, i)){
+                    d[i] = d[min_index] + distance(electric_stations, min_index, i);
                     pre[i] = min_index;
                 }
             }
@@ -62,4 +63,9 @@ Trip dijkstra(int n, Graph *graph, int range, int start, int end){
     }
     
     return *trip;
+}
+
+
+int main(void){
+    return EXIT_SUCCESS;
 }
