@@ -2,9 +2,11 @@
 #include <stdlib.h>
 
 #include "graph.h"
+#include "trip.h"
 
 
 
+// Function computing Dijkstra Algorithm
 Trip dijkstra(int n, Graph *graph, int range, int start, int end){
     // Initialisation des structures nécessaires
     // Initialisation du tableau des distances
@@ -38,9 +40,9 @@ Trip dijkstra(int n, Graph *graph, int range, int start, int end){
         }
         // Parcours des sommets accessibles
         for (int i=0;i<n;i++){
-            if (P[i]==0 && distance_between(graph, min_index, i) < range){
-                if (d[i] > d[min_index] + distance_between(graph, min_index, i)){
-                    d[i] = d[min_index] + distance_between(graph, min_index, i);
+            if (P[i]==0 && distance_between(*graph, min_index, i) < range){
+                if (d[i] > d[min_index] + distance_between(*graph, min_index, i)){
+                    d[i] = d[min_index] + distance_between(*graph, min_index, i);
                     pre[i] = min_index;
                 }
             }
@@ -49,12 +51,12 @@ Trip dijkstra(int n, Graph *graph, int range, int start, int end){
     }
     
     // Reconstruction du trajet
-    Trip trip;
+    Trip *trip = createTrip();
     int current = end;
     while (current != start){
-        trip = add_to_trip(trip, current);
+        addStop(trip, current);
         current = pre[current];
     }
     
-    return trip;
+    return *trip;
 }

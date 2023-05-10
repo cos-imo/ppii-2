@@ -2,12 +2,7 @@
 #define GRAPH_H
 
 
-// Boolean type
-typedef enum Bool{
-    FALSE,
-    TRUE
-} Bool;
-
+#include "bool.h"
 
 
 // Vertices type
@@ -32,11 +27,7 @@ typedef struct Graph{
 } Graph;
 
 
-// Trip structure
-typedef struct Trip{
-    int id_borne; // Place de la borne dans le tableau de bornes
-    struct Trip *next;
-} Trip;
+
 
 
 
@@ -58,22 +49,12 @@ void showGraph(Graph *graph);
 void freeGraph(Graph *graph);
 float distance_between(Graph graph, int id_borne1, int id_borne2);
 int distance(int idBorne1, int idBorne2);
-Trip dijkstra(int n, Graph *graph, int range, int start, int end);
 
-
-// Trip Functions
-Trip* createTrip(void);
-Bool tripEmpty(Trip *trip);
-Bool stopInTrip(Trip *trip, int id_station);
-void addStop(Trip *trip, int id_station);
-void removeStop(Trip *trip, int id_station);
-int get_nb_stops(Trip *trip);
-void showTrip(Trip *trip);
-void freeTrip(Trip *trip);
 
 
 // Graph and Trip Functions
 float distance_trip(Graph *graph, Trip *trip);
+Trip dijkstra(int n, Graph *graph, int range, int start, int end);
 
 
 #endif

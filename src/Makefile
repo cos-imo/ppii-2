@@ -2,10 +2,10 @@ CC=clang
 CFLAGS=-Wall -Wextra -pedantic -O0 -g3 -fsanitize=address
 
 
-ALL_EXECUTABLES=graph main # Ajouter tous les executables au fur et à mesure
+ALL_EXECUTABLES=graph main borne # Ajouter tous les executables au fur et à mesure
 
 
-all: graph main # Pareil ici
+all: graph main borne  # Pareil ici
 
 
 # main file
