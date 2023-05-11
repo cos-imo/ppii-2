@@ -23,7 +23,4 @@ int get_nb_stops(Trip *trip);
 void showTrip(Trip *trip);
 void freeTrip(Trip *trip);
 
-
-
-
 #endif

@@ -21,16 +21,8 @@ test_trip.o: test_trip.c
 
 # test_dijkstra File
 test_dijkstra: test_dijkstra.o ../src/dijkstra.o ../src/graph.o
-	$(CC) $(CFLAGS) -o test_dijkstra test_dijkstra.o ../src/dijkstra.o ../src/graph.o
-
-test_dijkstra.o: test_dijkstra.c ../src/dijkstra.o
-	$(CC) $(CFLAGS) -c test_dijkstra.c -o test_dijkstra.o
-
-../src/dijkstra.o: ../src/dijkstra.c ../src/dijkstra.h ../src/graph.o
-	$(CC) $(CFLAGS) -c ../src/dijkstra.c -o ../src/dijkstra.o
-
-../src/graph.o: ../src/graph.c ../src/graph.h
-	$(CC) $(CFLAGS) -c ../src/graph.c -o ../src/graph.o
+	$(CC) $(CFLAGS) ../src/trip.o ../src/borne.o ../src/dijkstra.o -o test_dijkstra test_dijkstra.o
+test_dijkstra.o: test_dijkstra.c 
 
 clean:
 	rm -f *.o ../src/*.o ${ALL_EXECUTABLES}

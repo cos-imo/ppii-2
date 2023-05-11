@@ -5,7 +5,7 @@
 
 #include "dijkstra.h"
 
-Trip *dijkstra(BorneElectrique *tableauBornes, int n, float range, int start, int end){
+Trip *dijkstra(BorneElectrique *tableauBornes, int n, int range, int start, int end){
     // Initialisation des structures nécessaires
     // Initialisation du tableau des distances depuis la borne de départ
     int d[n];
@@ -25,11 +25,12 @@ Trip *dijkstra(BorneElectrique *tableauBornes, int n, float range, int start, in
     for (int i=0;i<n;i++){
         P[i] = 0;
     }
-    P[start] = 1;
+    //P[start] = 1;
 
     // Algorithme de Dijkstra
     while (P[end] == 0){
         // Recherche du sommet de distance minimale
+        //printf("Recherche du sommet de distance minimale\n");
         int min = -1;
         int min_index = -1;
         for (int i=0;i<n;i++){
@@ -38,28 +39,45 @@ Trip *dijkstra(BorneElectrique *tableauBornes, int n, float range, int start, in
                 min_index = i;
             }
         }
+        //printf("C'est le sommet %d\n", min_index);
+        P[min_index] = 1;
         // Parcours des sommets accessibles
         for (int i=0;i<n;i++){
-            int dist = distance(min_index, i, tableauBornes);
+            int dist = distance(tableauBornes, min_index, i);
+            //printf("distance entre %d et %d : %d\n", min_index, i, dist);
+            //printf("P[%d] = %d\n", i, P[i]);
             if (P[i]==0 && dist < range){
+                //printf("Première condition passée\n");
+                //printf("d[%d] = %d\n", i, d[i]);
+                //printf("d[%d] + dist = %d\n", min_index, d[min_index] + dist);
                 if (d[i] > d[min_index] + dist){
+                    //printf("Mise à jour de la distance de %d\n", i);
                     d[i] = d[min_index] + dist;
                     pre[i] = min_index;
                 }
             }
         }
+        //printf("le minimum est %d\n", min_index);
+        //printf("son predescesseur est %d\n", pre[min_index]);
 
     }
-    
+    //printf("Calcul du trajet terminé\n");
+    if (d[end] == 40000){
+        //Pas de trajet possible
+        Trip *trip = createTrip();
+        return trip;
+    }
     // Reconstruction du trajet
     Trip *trip = createTrip();
     int current = end;
     while (current != start){
+        //printf("Ajout de l'arrêt %d\n", current);
         addStop(trip, current);
         current = pre[current];
     }
+    addStop(trip, start);
     
-    return *trip;
+    return trip;
 }
 
 
