@@ -9,7 +9,6 @@ typedef enum Bool{
 } Bool;
 
 
-
 // Vertices type
 typedef struct Vertices{
     int id_station;

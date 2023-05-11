@@ -17,7 +17,7 @@ test_graph.o: test_graph.c
 
 # test_trip File
 test_trip: test_trip.o
-	$(CC) $(CFLAGS) -o test_trip test_trip.o
+	$(CC) $(CFLAGS) ../src/trip.o -o test_trip test_trip.o
 test_trip.o: test_trip.c
 
 
