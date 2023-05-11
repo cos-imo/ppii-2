@@ -1,17 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "graph.h"
+
+#include "main.h"
+// #include "trip.h"
+// #include "borne.h"
 // #include "vehicle.h"
-// #include "electric_station.h"
+// #include "graph.h"
 
 
 
 int main(int argc, char** argv){
-    Graph *graph = createGraph();
-    // for loop to create complete graph
-    //      int id_station = <extraction du nouveau sommet>;
-    //      addVertexComplete(graph, id_station); // Rend complet automatiquement
+    // int number_stations = 20000;
+    // BorneElectrique station_array[number_stations];
+    // for (int i=0; i<number_stations; i++){
+    //     station_array[i] = {data, data, data};
+    // }
 
 
     int not_below;
@@ -31,8 +35,9 @@ int main(int argc, char** argv){
     vehicle->battery_pourcentage = (100 - not_below) * vehicle->battery_pourcentage;
     vehicle->max_time = max_time_at_station;
 
+    // Computing final trip
+    Trip final_trip = dijkstra(sta);
 
-    Trip final_trip = dijkstra();
 
     return EXIT_SUCCESS;
 }

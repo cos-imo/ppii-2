@@ -2,12 +2,7 @@
 #define GRAPH_H
 
 
-// Boolean type
-typedef enum Bool{
-    FALSE,
-    TRUE
-} Bool;
-
+#include "bool.h"
 
 
 // Vertices type
@@ -32,14 +27,6 @@ typedef struct Graph{
 } Graph;
 
 
-// Trip structure
-typedef struct Trip{
-    int id_borne;
-    struct Trip *next;
-} Trip;
-
-
-
 
 // Graph Functions
 Graph* createGraph();
@@ -56,20 +43,6 @@ void removeEdge(Graph *graph, int id_station1, int id_station2);
 int get_nb_vertices(Graph *graph);
 void showGraph(Graph *graph);
 void freeGraph(Graph *graph);
-
-
-// Trip Functions
-Trip* createTrip(int id_station);
-Bool tripEmpty(Trip *trip);
-Bool stopInTrip(Trip *trip, int id_station);
-void addStop(Trip *trip, int id_station);
-void removeStop(Trip *trip, int id_station);
-int get_nb_stops(Trip *trip);
-void showTrip(Trip *trip);
-void freeTrip(Trip *trip);
-
-// Graph and Trip Functions
-float distance_trip(Graph *graph, Trip *trip);
 
 
 #endif

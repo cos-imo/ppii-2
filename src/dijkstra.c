@@ -3,6 +3,7 @@
 #include "dijkstra.h"
 
 
+#include "dijkstra.h"
 
 Trip *dijkstra(BorneElectrique *tableauBornes, int n, float range, int start, int end){
     // Initialisation des structures nécessaires
@@ -12,11 +13,13 @@ Trip *dijkstra(BorneElectrique *tableauBornes, int n, float range, int start, in
         d[i] = 40000;
     }
     d[start] = 0;
+
     // Initialisation du tableau des prédécesseurs
     int pre[n];
     for (int i=0;i<n;i++){
         pre[i] = -1;
     }
+    
     // Initialisation de P : un tableau de booléens
     int P[n];
     for (int i=0;i<n;i++){
@@ -47,13 +50,19 @@ Trip *dijkstra(BorneElectrique *tableauBornes, int n, float range, int start, in
         }
 
     }
+    
     // Reconstruction du trajet
-    Trip *trip;
+    Trip *trip = createTrip();
     int current = end;
     while (current != start){
         addStop(trip, current);
         current = pre[current];
     }
-    return trip;
-
+    
+    return *trip;
 }
+
+
+// int main(void){
+//     return EXIT_SUCCESS;
+// }

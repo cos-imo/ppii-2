@@ -1,0 +1,50 @@
+eModel Name;Range (km);Acceleration (0-100 in x sec);Top Speed;Efficiency (Wh/km);Fast Charge (km/h);Brand
+Tesla Model Y Long Range Dual Motor;435;5.0;217;172;670;Tesla
+"Tesla Model 3 ";380;6.1;225;151;630;Tesla
+"Tesla Model Y ";345;6.9;217;167;580;Tesla
+Tesla Model 3 Long Range Dual Motor;485;4.4;233;155;750;Tesla
+"BYD ATTO 3 ";320;7.3;160;188;300;BYD
+MG MG4 Electric 64 kWh;365;7.9;160;169;450;MG
+Tesla Model S Plaid;550;2.1;282;173;770;Tesla
+BMW i4 eDrive40;470;5.7;190;172;730;BMW
+BMW iX xDrive40;360;6.1;200;197;480;BMW
+Tesla Model Y Performance;415;3.7;250;181;640;Tesla
+"Kia Niro EV ";380;7.8;167;171;380;Kia
+BMW iX1 xDrive30;355;5.6;180;182;510;BMW
+Mercedes EQS 450+;640;6.2;210;168;960;Mercedes
+Mercedes EQE 350+;525;6.4;210;173;780;Mercedes
+Hongqi E-HS9 99 kWh;355;4.9;200;254;410;Hongqi
+"BYD HAN ";465;3.9;180;178;450;BYD
+Audi Q8 e-tron 55 quattro;495;5.6;200;214;670;Audi
+Kia EV6 GT;370;3.5;260;200;970;Kia
+Tesla Model S Dual Motor;570;3.2;250;167;790;Tesla
+Lexus RZ 450e;310;5.6;160;206;460;Lexus
+Skoda Enyaq iV 80;420;8.6;160;183;530;Skoda
+BMW i7 xDrive60;510;4.7;240;199;760;BMW
+Hyundai IONIQ 6 Long Range AWD;440;5.1;185;168;1150;Hyundai
+Hyundai Kona Electric 64 kWh;395;7.9;167;162;370;Hyundai
+Audi Q4 e-tron 40;405;8.5;160;189;510;Audi
+"Smart #1 ";350;6.7;180;183;520;Smart
+Nissan Ariya 87kWh;445;7.6;160;196;530;Nissan
+BMW iX xDrive50;505;4.6;200;208;680;BMW
+Tesla Model 3 Performance;460;3.3;261;163;710;Tesla
+Dacia Spring Electric 45;165;19.1;125;152;180;Dacia
+"BMW iX3 ";385;6.8;180;192;520;BMW
+BMW i4 M50;435;3.9;225;186;670;BMW
+Volkswagen ID. Buzz Pro;330;10.2;145;233;460;Volkswagen
+BMW i4 eDrive35;400;6.0;190;168;540;BMW
+Audi e-tron GT RS;405;3.3;250;210;1000;Audi
+Renault Megane E-Tech EV60 220hp;360;7.4;160;167;500;Renault
+MG ZS EV Long Range;365;8.4;175;187;410;MG
+Fiat 500e Hatchback 42 kWh;235;9.0;150;159;390;Fiat
+Mercedes EQC 400 4MATIC;370;5.1;180;216;440;Mercedes
+"BYD TANG ";350;4.6;180;240;330;BYD
+Renault Zoe ZE50 R110;315;11.4;135;165;230;Renault
+Kia EV6 Long Range 2WD;410;7.3;185;180;1070;Kia
+Volkswagen ID.4 Pro;410;10.4;160;188;520;Volkswagen
+Mercedes EQS 580 4MATIC;605;4.3;210;178;900;Mercedes
+Hyundai IONIQ 6 Long Range 2WD;475;7.4;185;156;1240;Hyundai
+MG MG4 Electric 51 kWh;300;7.7;160;169;340;MG
+"Peugeot e-208 ";285;8.1;150;158;460;Peugeot
+Toyota bZ4X FWD;335;7.5;160;191;500;Toyota
+Volkswagen ID.4 Pro Performance;410;8.5;160;188;520;Volkswagen
