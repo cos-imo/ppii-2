@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dijkstra.h"
-#include "borne.c"
 
 
 
-Trip *dijkstra(BorneElectrique tableauBornes, int n, float range, int start, int end){
+Trip *dijkstra(BorneElectrique *tableauBornes, int n, float range, int start, int end){
     // Initialisation des structures nécessaires
     // Initialisation du tableau des distances depuis la borne de départ
     int d[n];
@@ -56,6 +55,5 @@ Trip *dijkstra(BorneElectrique tableauBornes, int n, float range, int start, int
         current = pre[current];
     }
     return trip;
-
 
 }

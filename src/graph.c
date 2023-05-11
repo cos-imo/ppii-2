@@ -304,6 +304,12 @@ void freeGraph(Graph *graph) {
 }
 
 
+// Function to compute the distance between 2 vertices
+int distance(int idBorne1, int idBorne2){
+    // A toi Thomas
+    return idBorne1 + idBorne2; // Pour pas avoir d'erreur...
+}
+
 // Function to return the distance between two electric stations
 float distance_between(Graph graph, int id_station1, int id_station2){
     Edges *current_edge = graph.list_edges;
@@ -326,11 +332,7 @@ float distance_between(Graph graph, int id_station1, int id_station2){
 }
 
 
-// Function to compute the distance between 2 vertices
-int distance(int idBorne1, int idBorne2){
-    // A toi Thomas
-    return idBorne1 + idBorne2; // Pour pas avoir d'erreur...
-}
+
 
 
 // Function computing Dijkstra Algorithm
@@ -535,9 +537,3 @@ float distance_trip(Graph *graph, Trip *trip){
 
     return d;
 }
-
-
-
-/*int main(){
-    return EXIT_SUCCESS;
-}*/

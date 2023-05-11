@@ -14,7 +14,6 @@ main: main.o
 
 main.o: main.c
 
-
 # Graph File
 graph: graph.o
 	$(CC) $(CFLAGS) -o graph graph.o
@@ -24,6 +23,9 @@ graph.o: graph.c
 graphe_borne: graphe_borne.o
 	$(CC) $(CFLAGS) -o graphe_borne graphe_borne.o
 graphe_borne.o: graphe_borne.c
+
+# Dijsktra File
+dijkstra.o: dijkstra.c
 
 # # Vehicle File
 # vehicle: vehicle.o

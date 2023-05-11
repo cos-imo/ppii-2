@@ -1,3 +1,7 @@
+#ifndef BORNE_H
+#define BORNE_H
+
+
 #include <stdio.h>
 #include <math.h>
 
@@ -46,6 +50,7 @@ BorneElectrique trouverBorneLaPlusProche(BorneElectrique tableauBornes[], int nb
     return borneLaPlusProche;
 }
 
+/*
 int main() {
     // Test pour un tableau de bornes random
     BorneElectrique tableauBornes[] = {
@@ -66,3 +71,6 @@ int main() {
     
     return 0;
 }
+*/
+
+#endif // BORNE_H
