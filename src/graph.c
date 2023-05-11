@@ -3,7 +3,6 @@
 #include <math.h>
 
 #include "graph.h"
-#include "borne.h"
 
 
 
@@ -302,10 +301,3 @@ void freeGraph(Graph *graph) {
 
     free(graph);
 }
-
-
-
-
-// int main(){
-//     return EXIT_SUCCESS;
-// }

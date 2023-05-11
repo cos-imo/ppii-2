@@ -20,6 +20,10 @@ test_trip: test_trip.o
 test_trip.o: test_trip.c
 
 
+# test_dijkstra File
+# test_dijkstra: test_dijkstra.o
+# 	$(CC) $(CFLAGS) ../src/dijkstra.o -o test_dijkstra test_dijkstra.o
+# test_dijkstra.o: test_dijkstra.c
 
 
 
