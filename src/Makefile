@@ -64,9 +64,15 @@ test_graph: ../tests/test_graph.o
 
 
 # test_trip File
-test_trip: test_trip.o
-	make ../src/graph.o && $(CC) $(CFLAGS) ../src/trip.o -o test_trip test_trip.o
-test_trip.o: ../tests/test_trip.c
+test_trip: ../tests/test_trip.o
+	make trip.o && $(CC) $(CFLAGS) trip.o -o test_trip ../tests/test_trip.o
+../tests/test_trip.o: ../tests/test_trip.c
+
+
+# test_borne File
+test_borne: ../tests/test_borne.o
+	make borne.o && $(CC) $(CFLAGS) borne.o -o test_borne ../tests/test_borne.o
+../tests/test_borne.o: ../tests/test_borne.c
 
 
 # test_dijkstra File
@@ -78,4 +84,4 @@ test_trip.o: ../tests/test_trip.c
 
 
 clean:
-	rm -f *.o ${ALL_EXECUTABLES} ${ALL_TEST_EXECUTABLES}
+	rm -f *.o ../tests/*.o ${ALL_EXECUTABLES} ${ALL_TEST_EXECUTABLES}

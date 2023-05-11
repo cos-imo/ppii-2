@@ -301,3 +301,8 @@ void freeGraph(Graph *graph) {
 
     free(graph);
 }
+
+
+// int main(void){
+//     return EXIT_SUCCESS;
+// }

@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "bases.h": "c"
+        "bases.h": "c",
+        "test_borne.h": "c"
     }
 }
