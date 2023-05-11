@@ -12,7 +12,7 @@ dependencies = graph borne trip dijkstra
 
 # main file
 main: main.o
-	$(CC) $(CFLAGS) dijkstra.o -o main main.o
+	make dijkstra.o && $(CC) $(CFLAGS) dijkstra.o -o main main.o
 main.o: main.c
 
 
@@ -36,7 +36,7 @@ trip.o: trip.c
 
 # Dijkstra File
 dijkstra: dijkstra.o
-	$(CC) $(CFLAGS) borne.o graph.o trip.o -o dijkstra dijkstra.o
+	make graph.o trip.o borne.o && $(CC) $(CFLAGS) borne.o graph.o trip.o -o dijkstra dijkstra.o
 dijkstra.o: dijkstra.c
 
 
