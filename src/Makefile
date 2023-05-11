@@ -2,13 +2,19 @@ CC=clang
 CFLAGS=-Wall -Wextra -pedantic -O0 -g3 -fsanitize=address
 
 
+
 ALL_EXECUTABLES=graph main borne trip dijkstra # Ajouter tous les executables au fur et à mesure
-DEPENDENCIES = graph borne trip dijkstra
+ALL_TEST_EXECUTABLES=test_graph test_borne test_trip test_dijkstra
 
 
-all: graph main borne trip dijkstra # Pareil ici
-dependencies = graph borne trip dijkstra
 
+all: graph main borne trip dijkstra
+all_tests: test_graph test_borne test_trip test_dijkstra
+
+
+
+
+######## SOURCE CODE ########
 
 # main file
 main: main.o
@@ -49,7 +55,27 @@ dijkstra.o: dijkstra.c
 
 
 
+######## TESTING ########
+
+# test_graph File
+test_graph: ../tests/test_graph.o
+	make graph.o && $(CC) $(CFLAGS) graph.o -o test_graph ../tests/test_graph.o
+../tests/test_graph.o: ../tests/test_graph.c
+
+
+# test_trip File
+test_trip: test_trip.o
+	make ../src/graph.o && $(CC) $(CFLAGS) ../src/trip.o -o test_trip test_trip.o
+test_trip.o: ../tests/test_trip.c
+
+
+# test_dijkstra File
+# test_dijkstra: test_dijkstra.o
+# 	$(CC) $(CFLAGS) ../src/dijkstra.o -o test_dijkstra test_dijkstra.o
+# test_dijkstra.o: ../tests/test_dijkstra.c
+
+
 
 
 clean:
-	rm -f *.o ${ALL_EXECUTABLES}
+	rm -f *.o ${ALL_EXECUTABLES} ${ALL_TEST_EXECUTABLES}

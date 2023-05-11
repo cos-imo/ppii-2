@@ -3,7 +3,6 @@
 #include <math.h>
 
 #include "borne.h"
-#include "trip.h"
 
 
 // Distance entre deux coordonnées GPS (pas touche au nom, Kieran)
