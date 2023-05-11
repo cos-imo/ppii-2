@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// #include "graph.h"
-// #include "trip.h"
+
 #include "dijkstra.h"
 
 
@@ -66,6 +65,6 @@ Trip dijkstra(int n, BorneElectrique electric_stations[], int range, int start, 
 }
 
 
-int main(void){
-    return EXIT_SUCCESS;
-}
+// int main(void){
+//     return EXIT_SUCCESS;
+// }

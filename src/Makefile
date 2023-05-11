@@ -3,14 +3,16 @@ CFLAGS=-Wall -Wextra -pedantic -O0 -g3 -fsanitize=address
 
 
 ALL_EXECUTABLES=graph main borne trip dijkstra # Ajouter tous les executables au fur et à mesure
+DEPENDENCIES = graph borne trip dijkstra
 
 
 all: graph main borne trip dijkstra # Pareil ici
+dependencies = graph borne trip dijkstra
 
 
 # main file
 main: main.o
-	$(CC) $(CFLAGS) -o main main.o
+	$(CC) $(CFLAGS) dijkstra.o -o main main.o
 main.o: main.c
 
 
