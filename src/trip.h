@@ -1,7 +1,5 @@
-
 #ifndef TRIP_H
 #define TRIP_H
-
 
 #include "bool.h"
 

@@ -18,7 +18,7 @@ all_tests: test_graph test_borne test_trip test_dijkstra
 
 # main file
 main: main.o
-	make dijkstra.o && $(CC) $(CFLAGS) dijkstra.o -o main main.o
+	make dijkstra.o trip.o borne.o && $(CC) $(CFLAGS) -o main main.o
 main.o: main.c
 
 # Graph File

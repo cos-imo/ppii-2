@@ -1,9 +1,10 @@
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
-#include "graph.h"
+
+
 #include "trip.h"
 #include "borne.h"
 
-Trip *dijkstra(BorneElectrique *,int, int, int, int);
+Trip *dijkstra(BorneElectrique *tableauBornes, int n, int range, int start, int end);
 
 #endif // DIJKSTRA_H
