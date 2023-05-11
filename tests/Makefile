@@ -11,7 +11,6 @@ all: test_graph test_trip
 # test_graph File
 test_graph: test_graph.o
 	$(CC) $(CFLAGS) -o test_graph test_graph.o
-
 test_graph.o: test_graph.c
 
 
