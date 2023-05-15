@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "dijkstra.h"
 
-
-#include "dijkstra.h"
-
 Trip *dijkstra(BorneElectrique *tableauBornes, int n, int range, int start, int end){
     // Initialisation des structures nécessaires
     // Initialisation du tableau des distances depuis la borne de départ
@@ -72,10 +69,10 @@ Trip *dijkstra(BorneElectrique *tableauBornes, int n, int range, int start, int 
     int current = end;
     while (current != start){
         //printf("Ajout de l'arrêt %d\n", current);
-        addStop(trip, current);
+        addStopBeginning(trip, current);
         current = pre[current];
     }
-    addStop(trip, start);
+    addStopBeginning(trip, start);
     
     return trip;
 }

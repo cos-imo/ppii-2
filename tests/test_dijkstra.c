@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "test_dijkstra.h"
 
-int main(void){
+int main(){
     // Creating a known graph and a list of bornes
 
     BorneElectrique tableauBornes[] = {
