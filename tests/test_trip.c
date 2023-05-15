@@ -44,6 +44,10 @@ int testTrip(){
     showTrip(trip);
     printf("\n");
 
+    addStopBeginning(trip, 3);
+    printf("Expected: 3-2\n");
+    showTrip(trip);
+
     // removeStop(trip, 1);
     // printf("Expected: 4\n");
     // showTrip(trip);
@@ -52,7 +56,7 @@ int testTrip(){
     // printf("Expected: _\n");
     // showTrip(trip);
 
-    // free(trip);
+    // Freeing trip
     freeTrip(trip);
 
     return EXIT_SUCCESS;

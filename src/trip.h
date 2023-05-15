@@ -16,6 +16,8 @@ Trip* createTrip(void);
 Bool tripEmpty(Trip *trip);
 Bool stopInTrip(Trip *trip, int id_station);
 void addStop(Trip *trip, int id_station);
+void addStopBeginning(Trip *trip, int id_station);
+void addStopPosition(Trip *trip, int id_station, int position);
 void removeStop(Trip *trip, int id_station);
 int get_nb_stops(Trip *trip);
 void showTrip(Trip *trip);
