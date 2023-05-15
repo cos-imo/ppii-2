@@ -7,3 +7,12 @@ vehicule_part: src/vehicule.c include/vehicule.h
 
 vehicule: src/vehicule.o
 	$(CC) -I include $(LDFLAGS) src/vehicule.o -o vehicule
+
+tests/test_trip: tests/test_trip.o src/trip.o
+	$(CC) -I include $(LDFLAGS) tests/test_trip.o src/trip.o -o tests/test_trip
+
+src/trip.o: src/trip.c src/trip.h
+	$(CC) -I include $(CFLAGS) src/trip.c
+
+tests/test_trip.o: tests/test_trip.c tests/test_trip.h
+	$(CC) -I include $(CFLAGS) tests/test_trip.c -o tests/test_trip.o

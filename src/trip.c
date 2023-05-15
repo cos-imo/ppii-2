@@ -74,9 +74,10 @@ void addStopBeginning(Trip *trip, int id_station)
     }
     else{
         Trip *new_trip = (Trip*)malloc(sizeof(Trip));
-        new_trip->id_borne = id_station;
-        new_trip->next = trip;
-        trip = new_trip;
+        new_trip->id_borne = trip->id_borne;
+        new_trip->next = trip->next;
+        trip->next = new_trip;
+        trip->id_borne = id_station;
     }
     
     // Trip *newTrip = (Trip*) malloc(sizeof(Trip));
