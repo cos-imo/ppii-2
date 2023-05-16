@@ -18,7 +18,7 @@ int testBorne() {
     // Recherche de la borne la plus proche d'une position GPS donnée
     double latitude = 48.8584;
     double longitude = 2.2945;
-    BorneElectrique borneProche = trouverBorneLaPlusProche(tableauBornes, sizeof(tableauBornes)/sizeof(tableauBornes[0]));
+    //BorneElectrique borneProche = trouverBorneLaPlusProche(tableauBornes, sizeof(tableauBornes)/sizeof(tableauBornes[0]));
     
     // Affichage des informations sur la borne la plus proche
     printf("La borne la plus proche de la position (%f, %f) est la borne %d, située à la position (%f, %f)\n", latitude, longitude, borneProche.id, borneProche.latitude, borneProche.longitude);

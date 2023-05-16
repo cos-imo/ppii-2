@@ -10,8 +10,7 @@
 
 
 
-// int main(int argc, char** argv){
-int main(void){
+int main(int argc, char** argv){
     // int number_stations = 20000;
     // BorneElectrique station_array[number_stations];
     // for (int i=0; i<number_stations; i++){
