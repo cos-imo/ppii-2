@@ -34,5 +34,11 @@ int main(){
     showTrip(trip4); // Erreur
     freeTrip(trip4);
 
+    char answer[1000];
+    strcpy(answer, tripToList(trip, tableauBornes));
+    //strcpy(answer, "blablibloblu\n");
+    printf("%s", answer);
+
+
     return EXIT_SUCCESS;
 }

@@ -79,11 +79,6 @@ void addStopBeginning(Trip *trip, int id_station)
         trip->next = new_trip;
         trip->id_borne = id_station;
     }
-    
-    // Trip *newTrip = (Trip*) malloc(sizeof(Trip));
-    // newTrip->id_borne = id_station;
-    // newTrip->next = *trip;
-    // *trip = newTrip;
 }
 
 

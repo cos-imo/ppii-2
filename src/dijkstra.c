@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "dijkstra.h"
+
 
 Trip *dijkstra(BorneElectrique *tableauBornes, int n, int range, int start, int end){
     // Initialisation des structures nécessaires
@@ -27,7 +29,6 @@ Trip *dijkstra(BorneElectrique *tableauBornes, int n, int range, int start, int 
     // Algorithme de Dijkstra
     while (P[end] == 0){
         // Recherche du sommet de distance minimale
-        //printf("Recherche du sommet de distance minimale\n");
         int min = -1;
         int min_index = -1;
         for (int i=0;i<n;i++){
@@ -36,48 +37,89 @@ Trip *dijkstra(BorneElectrique *tableauBornes, int n, int range, int start, int 
                 min_index = i;
             }
         }
-        //printf("C'est le sommet %d\n", min_index);
+        
+        // C'est le sommet min_index
         P[min_index] = 1;
+        
         // Parcours des sommets accessibles
-        for (int i=0;i<n;i++){
+        for (int i=0; i<n; i++){
             int dist = distance(tableauBornes, min_index, i);
-            //printf("distance entre %d et %d : %d\n", min_index, i, dist);
-            //printf("P[%d] = %d\n", i, P[i]);
+            // Distance entre min_index et i : dist
             if (P[i]==0 && dist < range){
-                //printf("Première condition passée\n");
-                //printf("d[%d] = %d\n", i, d[i]);
-                //printf("d[%d] + dist = %d\n", min_index, d[min_index] + dist);
+                // Première condition passée
                 if (d[i] > d[min_index] + dist){
-                    //printf("Mise à jour de la distance de %d\n", i);
+                    // Mise à jour de la distance de i
                     d[i] = d[min_index] + dist;
                     pre[i] = min_index;
                 }
             }
         }
-        //printf("le minimum est %d\n", min_index);
-        //printf("son predescesseur est %d\n", pre[min_index]);
+        // Le minimum de distance est i
+        // Son prédecesseur est pre[min_index]
 
     }
-    //printf("Calcul du trajet terminé\n");
+    
+    // Calcul du trajet terminé
     if (d[end] == 40000){
-        //Pas de trajet possible
+        // Pas de trajet possible
         Trip *trip = createTrip();
         return trip;
     }
+
     // Reconstruction du trajet
     Trip *trip = createTrip();
     int current = end;
     while (current != start){
-        //printf("Ajout de l'arrêt %d\n", current);
+        // Ajout de l'arrêt
         addStopBeginning(trip, current);
         current = pre[current];
     }
     addStopBeginning(trip, start);
     
+
     return trip;
 }
 
 
-// int main(void){
-//     return EXIT_SUCCESS;
-// }
+double* listLatLong(Trip* trip, BorneElectrique* tableauBornes){
+    Trip* current = trip;
+    double* res = NULL;
+    int pos = 0;
+    
+    while (current != NULL){
+        res[pos] = tableauBornes[current->id_borne].latitude;
+        res[pos+1] = tableauBornes[current->id_borne].longitude;
+        pos += 2;
+    }
+
+    return res;
+}
+
+
+
+
+int main(void){
+    Trip* trip = createTrip();
+    addStop(trip, 0);
+    addStop(trip, 1);
+    addStop(trip, 4);
+    showTrip(trip);
+    
+    BorneElectrique tableauBornes[] = {
+        {0, 2, 5, 48.8566, 2.3522}, // Paris
+        {1, 1, 3, 49.1833, -0.3594}, // Caen
+        {2, 0, 4, 45.7640, 4.8357}, // Lyon
+        {3, 2, 2, 43.2965, 5.3698}, // Marseille
+        {4, 1, 3, 48.1173, -1.6778}, // Rennes
+        {5, 1, 2, 40.440058, -3.689336} // Madrid
+    };
+    
+    double* listDoubles = listLatLong(trip, tableauBornes);
+    free(listDoubles);
+    
+    // char* result = tripToList(trip, tableauBornes);
+    // printf("%s", result);
+
+    freeTrip(trip);
+    free(tableauBornes);
+}

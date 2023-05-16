@@ -11,12 +11,8 @@
 
 
 int main(int argc, char** argv){
-    // int number_stations = 20000;
-    // BorneElectrique station_array[number_stations];
-    // for (int i=0; i<number_stations; i++){
-    //     station_array[i] = {data, data, data};
-    // }
-
+    // Arguments argv : least battery percentage, max minutes
+    // Nombre d'arguments varie : mode 1 renvoie tous les véhicules, mode 2 renvoie le Trip lat1,long1+lat2,long2+...
 
     int not_below;
     int max_minutes_at_station;
