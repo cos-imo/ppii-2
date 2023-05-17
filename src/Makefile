@@ -3,12 +3,12 @@ CFLAGS=-Wall -Wextra -pedantic -O0 -g3 -fsanitize=address
 
 
 
-ALL_EXECUTABLES=graph main borne trip dijkstra # Ajouter tous les executables au fur et à mesure
+ALL_EXECUTABLES=graph main borne trip dijkstra coordinates # Ajouter tous les executables au fur et à mesure
 ALL_TEST_EXECUTABLES=test_graph test_borne test_trip test_dijkstra
 
 
 
-all: graph main borne trip dijkstra
+all: graph main borne trip dijkstra coordinates
 all_tests: test_graph test_borne test_trip test_dijkstra
 
 
@@ -85,6 +85,12 @@ test_borne: ../tests/test_borne.o
 # test_dijkstra: test_dijkstra.o
 # 	$(CC) $(CFLAGS) ../src/dijkstra.o -o test_dijkstra test_dijkstra.o
 # test_dijkstra.o: ../tests/test_dijkstra.c
+
+
+
+coordinates: coordinates.o
+	make trip.o && $(CC) $(CFLAGS) trip.o -o coordinates coordinates.o
+coordinates.o: coordinates.c
 
 
 
