@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "bases.h": "c",
-        "test_borne.h": "c"
-    }
+        "test_borne.h": "c",
+        "main.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

@@ -1,5 +1,17 @@
 #include "vehicule.h"
 
+
+vehicule find_vehicle(char* model, vehicule* vehicle_table){
+	// On sait que le modèle est dans la liste
+    int size = 49;
+    for (int i=0; i<49; i++){
+        if (vehicle_table[i].modele == model){
+            return vehicle_table[i];
+        }
+    }
+}
+
+
 int main(int argc, char **argv) {
 	
 	FILE* fp = fopen("data.txt", "r");

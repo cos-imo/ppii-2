@@ -23,24 +23,7 @@ int distance(BorneElectrique tableauBornes[], int id1, int id2){
 }
 
 
-// // Fonction qui trouve la borne la plus proche de coordonnées GPS données
-// BorneElectrique trouverBorneLaPlusProche(BorneElectrique tableauBornes[], int nbBornes){
-//     double distanceMin = INFINITY; // Initialisation de la distance minimale à l'infini
-//     BorneElectrique borneLaPlusProche; // Initialisation de la borne la plus proche
-    
-//     for (int i = 2; i < nbBornes; i++) {
-//         int d = distance(tableauBornes, 0, i);
-//         if (d < distanceMin) {
-//             distanceMin = d;
-//             borneLaPlusProche = tableauBornes[i];
-//         }
-//     }
-    
-//     return borneLaPlusProche;
-// }
-
-
-//Function to compute the total distance of a trip
+// Function to compute the total distance of a trip
 float distance_trip(Trip *trip, BorneElectrique tableauBornes[]){
     int total_distance= 0;
     
@@ -60,9 +43,3 @@ float distance_trip(Trip *trip, BorneElectrique tableauBornes[]){
 
     return total_distance;
 }
-
-
-
-// int main(){
-//     return EXIT_SUCCESS;
-// }

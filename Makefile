@@ -3,12 +3,18 @@ CFLAGS=-c -Wall -Wextra -pedantic -O0 -g3 -fsanitize=address -fno-omit-frame-poi
 LDFLAGS=-Wall -Wextra -pedantic -O0 -g3 -fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls
 
 ALL_OBJECTS= src/borne.o src/dijkstra.o src/trip.o src/graph.o src/vehicule.o
-ALL_EXECUTABLES=
+ALL_EXECUTABLES=main
 ALL_TEST_EXECUTABLES= tests/test_borne tests/test_dijkstra tests/test_graph tests/test_trip
 
 
 
 ######## SOURCE CODE ########
+
+
+# main file
+## REFAIRE pareil que celui dans src mais ici...
+
+
 
 
 # vehicule
@@ -29,6 +35,11 @@ src/dijkstra.o: src/dijkstra.c include/dijkstra.h
 # borne
 src/borne.o: src/borne.c include/borne.h
 	$(CC) -I include $(CFLAGS) src/borne.c -o src/borne.o
+
+# coordinates
+src/coordinates.o: src/coordinates.c include/coordinates.h
+	$(CC) -I include $(CFLAGS) src/coordinates.c -o src/coordinates.o
+
 
 
 

@@ -18,7 +18,7 @@ all_tests: test_graph test_borne test_trip test_dijkstra
 
 # main file
 main: main.o
-	make dijkstra.o trip.o borne.o && $(CC) $(CFLAGS) -o main main.o
+	make coordinates.o dijkstra.o trip.o borne.o borne.o && $(CC) $(CFLAGS) coordinates.o dijkstra.o trip.o borne.o -o main main.o
 main.o: main.c
 
 # Graph File
@@ -33,6 +33,9 @@ graphe_borne.o: graphe_borne.c
 
 # Dijsktra File
 dijkstra.o: dijkstra.c
+
+# Coordinates File
+coordinates.o: coordinates.c
 
 # Borne electrique File
 borne: borne.o

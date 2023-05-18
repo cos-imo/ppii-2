@@ -16,6 +16,3 @@ typedef struct list_t {
 	vehicule *Vehicule;
 	struct list_t *nextNode;
 } liste;
-
-
-vehicule find_vehicle(char* model, vehicule* vehicle_table);
