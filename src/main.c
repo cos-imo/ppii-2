@@ -16,14 +16,12 @@ vehicule find_vehicle(char* model, vehicule* vehicle_table){
     }
 }
 
-/*
 void destroy(void* tab){
     for (int i = max_id; i>0; i--){
         free(tab[i]);
     }
     free(tab);
 }
-*/
 
 BorneElectrique* *init_bornes(){
     FILE* fp = fopen("../assets/bornes_parsed.csv", "r");
@@ -88,7 +86,6 @@ BorneElectrique* *init_bornes(){
         // printf("Importation terminée\n");
         fclose(fp);
     }
-
         return tab;
     }
 
@@ -177,8 +174,6 @@ vehicule* *init_vehicules(){
         // printf("Importation réussie!\n");
         fclose(fp);
     }
-
-    //destroy();
 
     return tab;
     }
