@@ -239,6 +239,9 @@ int main(int argc, char** argv){
         // vehicule v = find_vehicle(vehicle_model, all_vehicles);
         // int range = (100 - not_below) * v.range;
         // Trip *final_trip = dijkstra(tableauBornes, 10000, range, 0, 1);
+        // show_coordinates(trip, tableauBornes);
+
+        return EXIT_SUCCESS;
     }
 
     else{
