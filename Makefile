@@ -13,8 +13,20 @@ ALL_TEST_EXECUTABLES= tests/test_borne tests/test_dijkstra tests/test_graph test
 
 # main file
 ## REFAIRE pareil que celui dans src mais ici...
+# main TEMPORAIRE
+main: src/vehicule.o src/bornes.o src/main.o
+	mkdir build
+	gcc src/vehicule.o src/bornes.o src/main.o -o build/main_output
+	rm src/*.o
 
+src/main.o: src/main.c
+	gcc -c -I include src/main.c -o src/main.o
 
+src/vehicule.o: src/init_vehicules.c
+	gcc -c -I include src/init_vehicules.c -o src/vehicule.o -Iinclude
+
+src/bornes.o: src/init_bornes.c
+	gcc -I include -c src/init_bornes.c -o src/bornes.o
 
 
 # vehicule
