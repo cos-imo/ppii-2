@@ -23,6 +23,6 @@ typedef struct {
 int distance(BorneElectrique tableauBornes[], int id1, int id2);
 BorneElectrique trouverBorneLaPlusProche(BorneElectrique tableauBornes[], int nbBornes);
 float distance_trip(Trip *trip, BorneElectrique tableauBornes[]);
-
+BorneElectrique* *init_bornes();
 
 #endif

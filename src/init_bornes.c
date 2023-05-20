@@ -14,10 +14,8 @@ void destroy(){
     free(tab);
 }
 
-int
-main(
-	int argc,
-	char* *argv)
+BorneElectrique*
+*init_bornes()
 {
 
 	 FILE* fp = fopen("../assets/bornes_parsed.csv", "r");
@@ -28,7 +26,7 @@ main(
         printf("Importation du fichier data-bornes impossible\n Initialisation iterompue\n\n");
 
     else {
-        printf("Ouverture du fichier data-bornes réussie\n Début de l'importation...\n");
+        //printf("Ouverture du fichier data-bornes réussie\n Début de l'importation...\n");
         char buffer[1024];
 
         int row = 0;
@@ -76,10 +74,9 @@ main(
                 column++;
             }
         }
-        printf("Importation terminée\n");
+        //printf("Importation terminée\n");
         fclose(fp);
     }
 
-    	return 0;
+    	return tab;
 }
-

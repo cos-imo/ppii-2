@@ -1,10 +1,13 @@
-#include "vehicule.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
+#include <string.h>
+#include "vehicule.h"
 
 vehicule* *tab;
 int max_id;
 
-void destroy(){
+void destroy_bornes(){
     for (int i = max_id; i>0; i--){
         free(tab[i]->modele);
         free(tab[i]->marque);
@@ -13,10 +16,7 @@ void destroy(){
     free(tab);
 }
 
-int
-main(
-	int argc,
-	char* *argv)
+vehicule* *init_vehicules()
 {
 
 	 FILE* fp = fopen("../assets/ev-data.csv", "r");
@@ -27,7 +27,7 @@ main(
         printf("Importation du fichier ev-data impossible\n Initialisation iterompue\n\n");
 
     else {
-        printf("Importation du fichier ev-data réussie!\n");
+        //printf("Importation du fichier ev-data réussie!\n");
         char buffer[1024];
 
         int row = 0;
@@ -98,14 +98,11 @@ main(
             }
 
         }
-        printf("Importation réussie!\n");
+        //printf("Importation réussie!\n");
         fclose(fp);
     }
 
-    destroy();
+    //destroy();
 
-    	return 0;
+    	return tab;
 }
-
-
-
