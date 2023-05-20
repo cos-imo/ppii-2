@@ -3,5 +3,6 @@
 
 #include "dijkstra.h"
 #include "vehicule.h"
+#include "borne.h"
 
-#endif
+#endif /* MAIN_H */
