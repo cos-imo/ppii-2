@@ -2,7 +2,7 @@
 #define GRAPH_H
 
 
-#include "bool.h"
+#include <stdbool.h>
 
 
 // Vertices type
