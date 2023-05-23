@@ -13,8 +13,8 @@ typedef struct Trip{
 
 // Trip Functions
 Trip* createTrip(void);
-Bool tripEmpty(Trip *trip);
-Bool stopInTrip(Trip *trip, int id_station);
+bool tripEmpty(Trip *trip);
+bool stopInTrip(Trip *trip, int id_station);
 void addStop(Trip *trip, int id_station);
 void addStopBeginning(Trip *trip, int id_station);
 void addStopPosition(Trip *trip, int id_station, int position);
