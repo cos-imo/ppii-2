@@ -46,6 +46,7 @@ vehicule* *init_vehicules()
             char* value = strtok(buffer, ";");
 
             while (value) {
+                        max_id++;
     	    			vehicule *Vehicule = (vehicule *)malloc(sizeof(vehicule));
     	    	        assert(Vehicule!=NULL);
 
@@ -68,7 +69,6 @@ vehicule* *init_vehicules()
         				Vehicule->modele=modele_str;
         				Vehicule->id = max_id;
 
-        				max_id++;
             		break;
 
                 	case 1:
