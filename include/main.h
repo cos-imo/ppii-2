@@ -7,10 +7,6 @@
 #include "bool.h"
 
 
-typedef enum Bool{
-    FALSE,
-    TRUE
-} Bool;
 
 
 #endif /* MAIN_H */
