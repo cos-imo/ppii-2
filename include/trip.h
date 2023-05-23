@@ -1,7 +1,7 @@
 #ifndef TRIP_H
 #define TRIP_H
 
-#include <stdbool.h>
+#include "bool.h"
 
 // Trip structure
 typedef struct Trip{
