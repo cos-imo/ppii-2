@@ -12,7 +12,7 @@ vehicule find_vehicle(char* model, vehicule* vehicle_table){
 }
 
 
-int main(int argc, char **argv) {
+vehicule* *init_vehicules(){
 	
 	FILE* fp = fopen("data.txt", "r");
 
