@@ -7,7 +7,7 @@ int *utilisateurs;
 int *utilisateurs_start;
 int nbUtilisateurs;
 
-/*
+
 trip *trajectoires;
 vehicule* *tab_vehicules;
 BorneElectrique* *tab_bornes;
@@ -20,7 +20,7 @@ init_tabs()
         tab_vehicules = init_vehicules();
         tab_bornes = init_bornes();
 }
-*/
+
 int
 nombreBornes()
 {
@@ -38,7 +38,7 @@ nombreBornes()
 
         return res;
 }
-/*
+
 int
 nombreVehicules()
 {
@@ -100,7 +100,7 @@ init_destination
                 destination[i]=dest;
         }
 }
-*/
+
 int * *
 init_attente
         (int nbBornes)
