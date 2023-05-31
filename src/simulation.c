@@ -1,11 +1,13 @@
 #include "simulation.h"
 
-int time = 0;
-int *attente;
+int temps = 0;
+int* *attente;
 int *destination;
 int *utilisateurs;
 int *utilisateurs_start;
 int nbUtilisateurs;
+
+/*
 trip *trajectoires;
 vehicule* *tab_vehicules;
 BorneElectrique* *tab_bornes;
@@ -18,7 +20,7 @@ init_tabs()
         tab_vehicules = init_vehicules();
         tab_bornes = init_bornes();
 }
-
+*/
 int
 nombreBornes()
 {
@@ -36,7 +38,7 @@ nombreBornes()
 
         return res;
 }
-
+/*
 int
 nombreVehicules()
 {
@@ -98,22 +100,27 @@ init_destination
                 destination[i]=dest;
         }
 }
-
-int *
+*/
+int * *
 init_attente
         (int nbBornes)
 {
-        return ((int *)calloc(nbBornes,sizeof(int)));
+        int* *tab_general = (int* *)malloc(sizeof(int*)*nbBornes);
+        for(int i=0; i<nbBornes; i++){
+                int *newTab = (int *)malloc(sizeof(int));
+                tab_general[i]=newTab;
+        }
+        return tab_general;
 }
 
 void
 init_trajectoires()
 {
-        trajectoires = (trip *)malloc(sizeof(trip)*nbUtilisateurs);
+        //trip *trajectoires = (trip *)malloc(sizeof(trip)*nbUtilisateurs);
         for(int i=0; i<nbUtilisateurs; i++)
         {
-                int vehicule = rand()%
-                trajectoires 
+                int vehicule = rand()%10;
+                //trajectoires 
         }
 }
 
@@ -121,19 +128,13 @@ void simulation_step()
 {
         
 
-        time+=10;
+        temps+=10;
 }
 
-/*
+
 int main(){
 
-        int *test = generer_usagers(1000);
-
-        for(int i=0; i<nombreBornes();i++){
-                printf("%d\n",test[i]);
-        }
+        int* *tab = init_attente(nombreBornes());
 
         return 0;
 }
-*/
-
