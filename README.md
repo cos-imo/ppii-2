@@ -1,4 +1,6 @@
-# Projet Pluridisciplinaire d'Informatique Intégrative - Semestre 1
+# Projet Pluridisciplinaire d'Informatique Intégrative - Semestre 2
+
+![Static Badge](https://img.shields.io/badge/Scolaire-TelecomNancy-purple)
 ![Static Badge](https://img.shields.io/badge/Langage-C-blue)
 ![Static Badge](https://img.shields.io/badge/Langage-Makefile-green)
 ![Static Badge](https://img.shields.io/badge/Interface_web-PHP-purple)
@@ -10,7 +12,7 @@
 4. Organisation du dépôt et informations complémentaires
 
 ## Présentation
-Projet développé dans le cadre de ma scolarité à [Télécom Nancy](https://telecomnancy.univ-lorraine.fr) (1ère année - 1er semestre)
+Projet développé dans le cadre de ma scolarité à [Télécom Nancy](https://telecomnancy.univ-lorraine.fr) (1ère année - 2ème semestre)
 Extrait du sujet:
 
 > [C]onstruire en langage "C" un programme qui permet de proposer [...] un parcours de charge de véhicule électrique
