@@ -1,4 +1,8 @@
-# PPII 2ème semestre
+# Projet Pluridisciplinaire d'Informatique Intégrative - Semestre 1
+![Static Badge](https://img.shields.io/badge/Langage-C-blue)
+![Static Badge](https://img.shields.io/badge/Langage-Makefile-green)
+![Static Badge](https://img.shields.io/badge/Interface_web-PHP-purple)
+
 Groupe 24
 
 Ce projet contient les fichiers du PPII second semestre.
