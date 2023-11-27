@@ -5,6 +5,8 @@
 ![Static Badge](https://img.shields.io/badge/Langage-Makefile-green)
 ![Static Badge](https://img.shields.io/badge/Interface_web-PHP-purple)
 
+**Note**: This readme is also available in [english](https://github.com/cos-imo/ppii-2/blob/main/README-EN.md) version
+
 ## Sommaire
 1. Sommaire
 2. Présentation
